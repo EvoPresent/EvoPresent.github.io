@@ -298,6 +298,7 @@
       </div>
       </div>
 
+
 <section class="section">
   <div style="max-width: 1000px; margin: 0 auto; position: relative; overflow: hidden;">
     <div id="carousel-track" style="display: flex; transition: transform 0.5s ease;">
@@ -313,35 +314,11 @@
     </div>
 
     <!-- 左右按钮 -->
-    <button onclick="prevSlide()" style="position: absolute; top: 45%; left: 0; background: none; border: none; font-size: 2rem;">❮</button>
-    <button onclick="nextSlide()" style="position: absolute; top: 45%; right: 0; background: none; border: none; font-size: 2rem;">❯</button>
+    <button id="prevBtn" style="position: absolute; top: 45%; left: 0; background: none; border: none; font-size: 2rem;">❮</button>
+    <button id="nextBtn" style="position: absolute; top: 45%; right: 0; background: none; border: none; font-size: 2rem;">❯</button>
   </div>
 </section>
 
-<script>
-  let currentSlide = 0;
-  const track = document.getElementById("carousel-track");
-  const totalSlides = track.children.length;
-
-  function updateSlide() {
-    const offset = -currentSlide * 100;
-    track.style.transform = `translateX(${offset}%)`;
-  }
-
-  function nextSlide() {
-    currentSlide = (currentSlide + 1) % totalSlides;
-    updateSlide();
-  }
-
-  function prevSlide() {
-    currentSlide = (currentSlide - 1 + totalSlides) % totalSlides;
-    updateSlide();
-  }
-
-
-
-
-<!-- 固定布局的 BibTeX 部分 -->
 <section class="section" id="BibTeX">
   <div class="container content" style="max-width: 800px; margin: 0 auto;">
     <h2 class="title">BibTeX</h2>
@@ -356,5 +333,29 @@
 }</code></pre>
   </div>
 </section>
+
+<!-- 一定要把JS放在BODY末尾！ -->
+<script>
+  document.addEventListener("DOMContentLoaded", function () {
+    let currentSlide = 0;
+    const track = document.getElementById("carousel-track");
+    const totalSlides = track.children.length;
+
+    function updateSlide() {
+      const offset = -currentSlide * 100;
+      track.style.transform = `translateX(${offset}%)`;
+    }
+
+    document.getElementById("nextBtn").addEventListener("click", function () {
+      currentSlide = (currentSlide + 1) % totalSlides;
+      updateSlide();
+    });
+
+    document.getElementById("prevBtn").addEventListener("click", function () {
+      currentSlide = (currentSlide - 1 + totalSlides) % totalSlides;
+      updateSlide();
+    });
+  });
+</script>
 
 
