@@ -217,22 +217,27 @@
   </div>
 </div>
     
- <section class="section"  style="background-color: #f2f2f2;">
-  <div class="columns is-centered" style="margin-bottom: 0.25rem;">
-    <!-- 单图居中显示 -->
-    <div class="column is-half" style="text-align: center;">
-      <figure class="image">
-        <img 
-          src="./static/figure/heatmap.png" 
-          alt="image" 
-          style="width: 230%; height: auto;"  
-          loading="lazy"
-        />
-        <figcaption style="text-align: center;">
-          Figure 2. Presentation of MSSBench across four domains and ten secondary categories in Chat and Embodied tasks.
-        </figcaption>
-      </figure>
-    </div>
+<section class="section"  style="background-color: #f2f2f2;">
+  <div style="display: flex; justify-content: center;">
+    <figure style="width: 50%; text-align: center; margin-left: 5%; margin-top: -35px;">
+      
+      <!-- 图片 -->
+      <img 
+        src="./static/figure/heatmap.png" 
+        alt="image" 
+        style="width: 90%; height: auto;" 
+        loading="lazy" 
+      />
+      
+      <figcaption 
+        style="width: 90%; margin: 0.5rem auto 0; font-size: 0.95rem; text-align: left;">
+          <strong>(a)</strong> Example of outputs from a reasoning model and a non-reasoning model on a perception task. 
+  <span style="color: red;">Red highlights indicate visual hallucination.</span> 
+  <em>Multimodal reasoning models are generally more prone to amplifying hallucinations during the reasoning process compared to their non-reasoning counterparts.</em> 
+  <strong>(b)</strong> Performance of different models on reasoning and perception tasks in the <em>RH-Bench</em> dataset. Better performing models are positioned in the upper right corner. 
+  <em>Baseline non-reasoning models of varying scales typically exhibit weaker reasoning capabilities and fewer hallucination, whereas reasoning models display the opposite trend.</em>
+
+    </figure>
   </div>
 </section>
 
