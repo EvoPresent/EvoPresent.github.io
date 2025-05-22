@@ -6,7 +6,7 @@
         content="Deformable Neural Radiance Fields creates free-viewpoint portraits (nerfies) from casually captured videos.">
   <meta name="keywords" content="Nerfies, D-NeRF, NeRF">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Multimodal Situational Safety</title>
+  <title>More Thinking, Less Seeing? Assessing Amplified Hallucination in Multimodal Reasoning Models</title>
 
   <!-- Global site tag (gtag.js) - Google Analytics -->
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-PYVRSFMDRL"></script>
@@ -88,23 +88,29 @@
     <div class="container is-max-desktop">
       <div class="columns is-centered">
         <div class="column has-text-centered">
-          <h1 class="title is-1 publication-title">Multimodal Situational Safety</h1>
+          <h1 class="title is-1 publication-title">More Thinking, Less Seeing? Assessing Amplified Hallucination in Multimodal Reasoning Models</h1>
           <div class="is-size-5 publication-authors">
             <span class="author-block">
-              <a href="https://kevinz-01.github.io/">Kaiwen Zhou*</a><sup>1</sup>,</span>
+              <a href="https://kevinz-01.github.io/">Chengzhi Liu*</a><sup>1</sup>,</span>
             <span class="author-block">
-              <a href="https://scholar.google.com.hk/citations?user=QC1kfNYAAAAJ&hl=zh-CN">Chengzhi Liu*</a><sup>1</sup>,</span>
+              <a href="https://scholar.google.com.hk/citations?user=QC1kfNYAAAAJ&hl=zh-CN">Zhongxing Xu*</a><sup>1</sup>,</span>
             <span class="author-block">
-              <a href="https://xuandongzhao.github.io/">Xuandong Zhao</a><sup>2</sup>,
+              <a href="https://xuandongzhao.github.io/">Qingyue Wei</a><sup>2</sup>,
             </span>
             <span class="author-block">
-              <a href="https://acompalas.github.io/#projects">Anderson Compalas</a><sup>1</sup>,
+              <a href="https://acompalas.github.io/#projects">Juncheng Wu</a><sup>1</sup>,
             </span>
             <span class="author-block">
-              <a href="https://dawnsong.io/">Dawn Song</a><sup>2</sup>,
+              <a href="https://dawnsong.io/">James Zou</a><sup>2</sup>,
             </span>
             <span class="author-block">
-              <a href="https://eric-xw.github.io/">Xin Eric Wang†</a><sup>1</sup>,
+              <a href="https://dawnsong.io/">Xin Eric Wang</a><sup>2</sup>,
+            </span>
+            <span class="author-block">
+              <a href="https://eric-xw.github.io/">Yuyin Zhou</a><sup>1</sup>,
+            </span>
+            <span class="author-block">
+              <a href="https://eric-xw.github.io/">Sheng Liu</a><sup>1</sup>,
             </span>
        
           </div>
@@ -250,12 +256,7 @@
         <h2 class="title is-3">Abstract</h2>
         <div class="content has-text-justified">
           <p>
-           Multimodal Large Language Models (MLLMs) are rapidly evolving, demonstrating impressive capabilities as multimodal assistants that interact with both humans and their environments. However, this increased sophistication introduces significant safety concerns. In this paper, we present the first evaluation and analysis of a novel safety challenge termed Multimodal Situational Safety, which explores how safety considerations vary based on the specific situation in which the user or agent is engaged. 
-            We argue that for an MLLM to respond safely—whether through language or action—it often needs to assess the safety implications of a language query within its corresponding visual context. To evaluate this capability, we develop the Multimodal Situational Safety benchmark (MSSBench) to assess the situational safety performance of current MLLMs. 
-The dataset comprises 1,820 language query-image pairs, half of which the image context is safe, and the other half is unsafe. 
-We also develop an evaluation framework that analyzes key safety aspects, including explicit safety reasoning, visual understanding, and, crucially, situational safety reasoning. 
-Our findings reveal that current MLLMs struggle with this nuanced safety problem in the instruction-following setting and struggle to tackle these situational safety challenges all at once, highlighting a key area for future research. 
-Furthermore, we develop multi-agent pipelines to coordinately solve safety challenges, which shows consistent improvement in safety over the original MLLM response.
+          Test-time compute has empowered multimodal large language models to generate extended reasoning chains, yielding strong performance on tasks such as multimodal math reasoning. However, we observe that this improved reasoning ability often comes with increased hallucination: as generations become longer, models tend to drift away from image-grounded content and rely more on language priors. Attention analysis reveals that longer reasoning chains reduce focus on visual inputs, contributing to hallucination. To systematically study this phenomenon, we introduce <i><i>RH-AUC</i></i>, a metric that quantifies how a model's perception accuracy changes with reasoning length, enabling evaluation of whether the model preserves visual grounding while reasoning. We also release <i><i><i><i>RH-Bench</i></i></i></i>, a diagnostic benchmark covering diverse multimodal tasks, designed to jointly assess the balance of reasoning ability and hallucination. We find that <i>(i)</i> larger models generally exhibit a better balance between reasoning and perception; <i>(ii)</i> reasoning and perception balance depends more on the types and domains of the training data than its volume. Our findings highlight the need for evaluation frameworks that account for both reasoning quality and perceptual reliability.
           </p>
         </div>
       </div>
