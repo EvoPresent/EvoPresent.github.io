@@ -52,7 +52,7 @@
       <div class="columns is-centered">
         <div class="column has-text-centered">
          <img src="./static/figure/logo1.png" alt="Logo" style="height: 80px; margin-bottom: 20px;" />
-            <h1 class="title publication-title" style="font-size: 1.8rem; margin-top: 10px;">
+            <h1 class="title publication-title" style="font-size: 2.3rem; margin-top: 10px;">
             More Thinking, Less Seeing? Assessing Amplified Hallucination in Multimodal Reasoning Models11
           </h1>
 
@@ -191,7 +191,7 @@
         <img 
           src="./static/figure/radar.png" 
           alt="image" 
-          style="width: 100%; height: auto;"  
+          style="width: 130%; height: auto;"  
           loading="lazy"
         />
         <figcaption style="text-align: center;">
@@ -210,36 +210,44 @@
   </div>
 </div>
     
-<section class="section">
-  <div class="columns is-centered" style="margin-bottom: 0rem;">
-    <figure class="image" style="width: 100%;">
-      <div class="columns">
-        <!-- 左侧图片占 68% 宽度 -->
-        <div class="column is-8" style="text-align: center;">
-          <img 
-            src="./static/pipline_overall.png" 
-            alt="image" 
-            style="width: 100%; height: auto;" 
-            loading="lazy"
-          />
-        </div>
-        <!-- 右侧图片占 32% 宽度 -->
-        <div class="column is-4" style="text-align: center;">
-          <img 
-            src="./static/pipline_example.png" 
-            alt="image" 
-            style="width: 100%; height: auto;" 
-            loading="lazy"
-          />
-        </div>
-      </div>
-      <!-- 总的figcaption -->
-      <figcaption style="text-align: center;">
-        Figure 4. The overall structure of the chat data collection pipeline (left) and examples of two multimodal assistant scenarios (right). The pipeline includes four parts: (1) Generating Intented Activity and Unsafe Textual Situations. (2) Iterative Filtering with LLM. (3) Constructing a Multimodal Situational Safety Dataset via Image Retrieval. (4) Human Verification \& Query Generation. 
-      </figcaption>
-    </figure>
+ <section class="section">
+  <div class="columns is-centered" style="margin-bottom: 0.25rem;">
+    <!-- 单图居中显示 -->
+    <div class="column is-half" style="text-align: center;">
+      <figure class="image">
+        <img 
+          src="./static/figure/heatmap.png" 
+          alt="image" 
+          style="width: 130%; height: auto;"  
+          loading="lazy"
+        />
+        <figcaption style="text-align: center;">
+          Figure 2. Presentation of MSSBench across four domains and ten secondary categories in Chat and Embodied tasks.
+        </figcaption>
+      </figure>
+    </div>
   </div>
 </section>
+
+ <section class="section">
+  <div class="columns is-centered" style="margin-bottom: 0.25rem;">
+    <!-- 单图居中显示 -->
+    <div class="column is-half" style="text-align: center;">
+      <figure class="image">
+        <img 
+          src="./static/figure/overthinking.png" 
+          alt="image" 
+          style="width: 130%; height: auto;"  
+          loading="lazy"
+        />
+        <figcaption style="text-align: center;">
+          Figure 2. Presentation of MSSBench across four domains and ten secondary categories in Chat and Embodied tasks.
+        </figcaption>
+      </figure>
+    </div>
+  </div>
+</section>
+
 
     
 <div class="columns is-centered has-text-centered" style="margin-top: -0.5rem;">
@@ -254,7 +262,7 @@
 <section class="section" style="margin-top: -2.6rem;">
   <figure class="image is-centered" style="width: 80%; margin: 0 auto 1rem; text-align: center;">
     <img 
-      src="./static/table1.png" 
+      src="./static/figure/length.png" 
       alt="image" 
       style="width: 100%; height: auto;" 
       loading="lazy"
@@ -265,113 +273,13 @@
   </figure>
 </section>
 
+    
 <section class="section" style="margin-top: -1.5rem;">
   <div class="content has-text-centered">
     <p>
    We identify three main reasons for MLLM's poor performance on the MSS benchmark: lack of explicit safety reasoning, visual understanding, and situational safety judgment. To validate these hypotheses, we design four distinct evaluation settings: (1) explicit safety reasoning for user queries, (2) explicit safety reasoning for user intents, (3) explicit safety reasoning for user intents with self-captioning, and (4) explicit safety reasoning for user intents using ground-truth situation information. 
     </p>
   </div>
-</section>
-
-
-<section class="section">
-  <figure>
-    <!-- 第一排 -->
-    <div class="columns is-centered" style="margin-top: -2.5rem;">
-      <div class="column is-4" style="text-align: center;">
-        <figure class="image">
-          <img 
-            src="./static/chat_safe.png" 
-            alt="image" 
-            style="width: 100%; height: auto;" 
-            loading="lazy" 
-          />
-          <figcaption style="text-align: center;">
-            Chat task safe situations.
-          </figcaption>
-        </figure>
-      </div>
-      <div class="column is-4" style="text-align: center;">
-        <figure class="image">
-          <img 
-            src="./static/chat_unsafe.png" 
-            alt="image" 
-            style="width: 100%; height: auto;" 
-            loading="lazy" 
-          />
-          <figcaption style="text-align: center;">
-            Chat task unsafe situations.
-          </figcaption>
-        </figure>
-      </div>
-      <div class="column is-4" style="text-align: center;">
-        <figure class="image">
-          <img 
-            src="./static/chat_avg.png" 
-            alt="image" 
-            style="width: 100%; height: auto;" 
-            loading="lazy" 
-          />
-          <figcaption style="text-align: center;">
-            Chat task average.
-          </figcaption>
-        </figure>
-      </div>
-    </div>
-
-    <!-- 第二排 -->
-    <div class="columns is-centered" style="margin-bottom: 2rem;">
-      <div class="column is-4" style="text-align: center;">
-        <figure class="image">
-          <img 
-            src="./static/e_safe.png" 
-            alt="image" 
-            style="width: 100%; height: auto;" 
-            loading="lazy" 
-          />
-          <figcaption style="text-align: center;">
-             Embodied task safe situations.
-          </figcaption>
-        </figure>
-      </div>
-      <div class="column is-4" style="text-align: center;">
-        <figure class="image">
-          <img 
-            src="./static/e_unsafe.png" 
-            alt="image" 
-            style="width: 100%; height: auto;" 
-            loading="lazy" 
-          />
-          <figcaption style="text-align: center;">
-          Embodied task unsafe situations.
-          </figcaption>
-        </figure>
-      </div>
-      <div class="column is-4" style="text-align: center;">
-        <figure class="image">
-          <img 
-            src="./static/e_avg.png" 
-            alt="image" 
-            style="width: 100%; height: auto;" 
-            loading="lazy" 
-          />
-          <figcaption style="text-align: center;">
-           Embodied task average.
-          </figcaption>
-        </figure>
-      </div>
-    </div>
-    <!-- 总的figcaption -->
-  <figcaption style="text-align: center;">
-   Table 2. Diagnosis of different factors influencing the MLLM’s situational safety performance.
-  Besides the <strong>instruction following (IF)</strong> setting, we design four extra settings: 
-  (1) <strong>query classification (QC)</strong>: letting MLLMs explicitly reason the safety of user query, 
-  (2) <strong>intent classification (IC)</strong>: explicitly reason the safety of user’s intent, 
-  (3) <strong>IC w/ Self Cap</strong>: explicitly reason the safety of user’s intent providing with self-caption, and 
-  (4) <strong>IC w/ GT Cap</strong>: explicitly reason the safety of user’s intent providing with ground-truth situation information. 
-  We report and compare the individual (a) and average (b) performance of open-source MLLMs and closed-source MLLMs.
-</figcaption>
-  </figure>
 </section>
 
 
@@ -397,36 +305,7 @@
 </section>
 
 
-<!-- 固定布局的图片展示，不使用响应式 -->
-<section class="section">
-  <div class="columns"style="margin-top: -0.6rem;">
-    <!-- 左侧图片 -->
-    <div class="column" style="text-align: center; width: 50%;">
-      <figure class="image" style="margin: 0 auto;">
-        <img 
-          src="./static/agent_chat.png" 
-          alt="image" 
-          style="width: 600px; height: auto;" 
-          loading="lazy"
-        />
-      </figure>
-    </div>
-    
-    <div class="column" style="text-align: center; width: 50%;">
-      <figure class="image" style="margin: 0 auto;">
-        <img 
-          src="./static/agent_embodied.png" 
-          alt="image" 
-          style="width: 600px; height: auto;" 
-          loading="lazy"
-        />
-      </figure>
-    </div>
-  </div>
-  <figcaption style="text-align: center; margin-top: 0.5rem;">
-    Table 3. MLLM's performance on our benchmark with three reasoning settings. Base setting: without explicit safety reasoning. 1 step CoT: MLLMs reasoning the safety of user query and generating response at one step. Multi-agent: our designed multi-agent pipeline. The results show that the multi-agent pipeline improves performance in most cases.
-  </figcaption>
-</section>
+
 
 <!-- 固定布局的 BibTeX 部分 -->
 <section class="section" id="BibTeX">
