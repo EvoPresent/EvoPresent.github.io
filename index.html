@@ -179,17 +179,66 @@
         </div>
       </div>
     </div>
+
+  <section class="section">
+  <div style="max-width: 1000px; margin: 0 auto; position: relative; overflow: hidden;">
+    <div id="takeaway-track" style="display: flex; transition: transform 0.5s ease;">
+
+      <!-- 卡片 1 -->
+      <div class="takeaway-card" style="min-width: 100%;">
+        <div style="border: 2px solid #4A90E2; border-radius: 10px; overflow: hidden; width: fit-content; max-width: 100%;">
+          <div style="background-color: #A0C4EF; padding: 8px 12px; font-weight: bold; color: #1b4f91;">
+            Takeaway 1: Visual Attention Declines with Overthinking
+          </div>
+          <div style="background-color: #E8F1FC; padding: 10px 15px; font-style: italic; border-top: 1px solid #4A90E2;">
+            Longer reasoning chains reduce the model's attention to visual inputs, increasing hallucination risk.
+          </div>
+        </div>
+      </div>
+
+      <!-- 卡片 2 -->
+      <div class="takeaway-card" style="min-width: 100%;">
+        <div style="border: 2px solid #4A90E2; border-radius: 10px; overflow: hidden; width: fit-content; max-width: 100%;">
+          <div style="background-color: #A0C4EF; padding: 8px 12px; font-weight: bold; color: #1b4f91;">
+            Takeaway 2: Moderate Reasoning Length Strikes the Best Reasoning-Hallucination Balance
+          </div>
+          <div style="background-color: #E8F1FC; padding: 10px 15px; font-style: italic; border-top: 1px solid #4A90E2;">
+            Reasoning length exerts a non-monotonic effect on model performance: both insufficient and excessive reasoning degrade accuracy, and the optimal length is task-dependent.
+          </div>
+        </div>
+      </div>
+
+      <!-- 卡片 3 -->
+      <div class="takeaway-card" style="min-width: 100%;">
+        <div style="border: 2px solid #4A90E2; border-radius: 10px; overflow: hidden; width: fit-content; max-width: 100%;">
+          <div style="background-color: #A0C4EF; padding: 8px 12px; font-weight: bold; color: #1b4f91;">
+            Takeaway 3: Larger Models Are Not Always Better at Perception
+          </div>
+          <div style="background-color: #E8F1FC; padding: 10px 15px; font-style: italic; border-top: 1px solid #4A90E2;">
+            Larger models show better reasoning but may still suffer from visual hallucinations if over-reliant on language priors.
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- 左右按钮 -->
+    <button id="takeawayPrev" style="position: absolute; top: 45%; left: 0; background: none; border: none; font-size: 2rem;">❮</button>
+    <button id="takeawayNext" style="position: absolute; top: 45%; right: 0; background: none; border: none; font-size: 2rem;">❯</button>
+  </div>
+</section>
+
  
 
  <section class="section" padding-top: 2rem; padding-bottom: 2rem;">
   <h2 class="title is-3" style="text-align: center;">Multimodal Reasoning Can Amplify Visual Hallucination</h2>
 
   <div style="display: flex; justify-content: center;">
-    <figure style="width: 80%; text-align: center;">
+    <figure style="width: 90%; text-align: center;">
       <img 
         src="./static/figure/radar.png" 
         alt="image" 
-        style="width: 120%; height: auto;" 
+        style="width: 150%; height: auto;" 
         loading="lazy"
       />
       <figcaption style="font-size: 0.95rem; text-align: center; margin: 0.5rem auto 0; max-width: 90%;">
@@ -204,11 +253,11 @@
   <h2 class="title is-3" style="text-align: center;">Why Reasoning Models Amplify Hallucinations?</h2>
 
   <div style="display: flex; justify-content: center;">
-    <figure style="width: 80%; text-align: center;">
+    <figure style="width: 90%; text-align: center;">
       <img 
         src="./static/figure/heatmap.png" 
         alt="image" 
-        style="width: 120%; height: auto;" 
+        style="width: 150%; height: auto;" 
         loading="lazy"
       />
       <figcaption style="font-size: 0.95rem; text-align: center; margin: 0.5rem auto 0; max-width: 90%;">
@@ -227,11 +276,11 @@
   <h2 class="title is-3" style="text-align: center;">Why Reasoning Models Amplify Hallucinations?</h2>
 
   <div style="display: flex; justify-content: center;">
-    <figure style="width: 80%; text-align: center;">
+    <figure style="width: 90%; text-align: center;">
       <img 
         src="./static/figure/overthinking.png" 
         alt="image" 
-        style="width: 120%; height: auto;" 
+        style="width: 150%; height: auto;" 
         loading="lazy"
       />
       <figcaption style="font-size: 0.95rem; text-align: center; margin: 0.5rem auto 0; max-width: 90%;">
@@ -256,7 +305,7 @@
     
  <section class="section" padding-top: 2rem; padding-bottom: 2rem;">
   <div style="display: flex; justify-content: center;">
-    <figure style="width: 80%; text-align: center;">
+    <figure style="width: 90%; text-align: center;">
       <img 
         src="./static/figure/length.png" 
         alt="image" 
@@ -322,14 +371,7 @@
 <section class="section" id="BibTeX">
   <div class="container content" style="max-width: 800px; margin: 0 auto;">
     <h2 class="title">BibTeX</h2>
-    <pre><code>@misc{zhou2024multimodalsituationalsafety,
-      title={Multimodal Situational Safety}, 
-      author={Kaiwen Zhou and Chengzhi Liu and Xuandong Zhao and Anderson Compalas and Dawn Song and Xin Eric Wang},
-      year={2024},
-      eprint={2410.06172},
-      archivePrefix={arXiv},
-      primaryClass={cs.AI},
-      url={https://arxiv.org/abs/2410.06172}, 
+    <pre><code>
 }</code></pre>
   </div>
 </section>
@@ -352,6 +394,29 @@
     });
 
     document.getElementById("prevBtn").addEventListener("click", function () {
+      currentSlide = (currentSlide - 1 + totalSlides) % totalSlides;
+      updateSlide();
+    });
+  });
+</script>
+
+<script>
+  document.addEventListener("DOMContentLoaded", function () {
+    let currentSlide = 0;
+    const track = document.getElementById("takeaway-track");
+    const totalSlides = track.children.length;
+
+    function updateSlide() {
+      const offset = -currentSlide * 100;
+      track.style.transform = `translateX(${offset}%)`;
+    }
+
+    document.getElementById("takeawayNext").addEventListener("click", function () {
+      currentSlide = (currentSlide + 1) % totalSlides;
+      updateSlide();
+    });
+
+    document.getElementById("takeawayPrev").addEventListener("click", function () {
       currentSlide = (currentSlide - 1 + totalSlides) % totalSlides;
       updateSlide();
     });
