@@ -188,10 +188,10 @@
       <div class="takeaway-card" style="min-width: 100%;">
         <div style="border: 2px solid #4A90E2; border-radius: 10px; overflow: hidden; width: fit-content; max-width: 100%;">
           <div style="background-color: #A0C4EF; padding: 8px 12px; font-weight: bold; color: #1b4f91;">
-            Takeaway 1: Visual Attention Declines with Overthinking
+            Takeaway 1:  Reasoning Models Amplify Visual Hallucinations
           </div>
           <div style="background-color: #E8F1FC; padding: 10px 15px; font-style: italic; border-top: 1px solid #4A90E2;">
-            Longer reasoning chains reduce the model's attention to visual inputs, increasing hallucination risk.
+            Across training paradigms and model scales, multi-modal reasoning models exhibit a consistent drop in accuracy and rise in hallucination rates on general visual benchmarks.
           </div>
         </div>
       </div>
@@ -200,10 +200,10 @@
       <div class="takeaway-card" style="min-width: 100%;">
         <div style="border: 2px solid #4A90E2; border-radius: 10px; overflow: hidden; width: fit-content; max-width: 100%;">
           <div style="background-color: #A0C4EF; padding: 8px 12px; font-weight: bold; color: #1b4f91;">
-            Takeaway 2: Moderate Reasoning Length Strikes the Best Reasoning-Hallucination Balance
+            Takeaway 2: Why Reasoning Models Amplify Hallucinations?
           </div>
           <div style="background-color: #E8F1FC; padding: 10px 15px; font-style: italic; border-top: 1px solid #4A90E2;">
-            Reasoning length exerts a non-monotonic effect on model performance: both insufficient and excessive reasoning degrade accuracy, and the optimal length is task-dependent.
+           The reduction of visual attention in reasoning models amplifies visual hallucinations. Longer reasoning chains further exacerbate the degradation of attention to visual information and focus toward linguistic priors.
           </div>
         </div>
       </div>
@@ -212,10 +212,10 @@
       <div class="takeaway-card" style="min-width: 100%;">
         <div style="border: 2px solid #4A90E2; border-radius: 10px; overflow: hidden; width: fit-content; max-width: 100%;">
           <div style="background-color: #A0C4EF; padding: 8px 12px; font-weight: bold; color: #1b4f91;">
-            Takeaway 3: Larger Models Are Not Always Better at Perception
+            Takeaway 3: Moderate Reasoning Length Strikes the Best Reasoning-Hallucination Balance
           </div>
           <div style="background-color: #E8F1FC; padding: 10px 15px; font-style: italic; border-top: 1px solid #4A90E2;">
-            Larger models show better reasoning but may still suffer from visual hallucinations if over-reliant on language priors.
+            Reasoning length exerts a non-monotonic effect on model performance: both insufficient and excessive reasoning degrade accuracy, and the optimal length is task-dependent.
           </div>
         </div>
       </div>
@@ -242,11 +242,23 @@
         loading="lazy"
       />
       <figcaption style="font-size: 0.95rem; text-align: center; margin: 0.5rem auto 0; max-width: 90%;">
-       Comparison of reasoning and non-reasoning models on five perception benchmarks. Results are shown for 3B models (left) and 7B models (right). Higher scores indicate lower hallucination.
+          Across training paradigms and model scales, multi-modal reasoning models exhibit a consistent drop in accuracy and rise in hallucination rates on general visual benchmarks.
       </figcaption>
     </figure>
   </div>
 </section>
+
+
+<div style="border: 2px solid #4A90E2; border-radius: 10px; overflow: hidden; width: fit-content; max-width: 100%;">
+  <div style="background-color: #A0C4EF; padding: 8px 12px; font-weight: bold; color: #1b4f91;">
+    Takeaway 1: Reasoning Models Amplify Visual Hallucinations
+  </div>
+  <div style="background-color: #E8F1FC; padding: 10px 15px; font-style: italic; border-top: 1px solid #4A90E2;">
+    <span>
+    The reduction of visual attention in reasoning models amplifies visual hallucinations. Longer reasoning chains further exacerbate the degradation of attention to visual information and focus toward linguistic priors.
+    </span>
+  </div>
+</div>
 
     
  <section class="section" padding-top: 2rem; padding-bottom: 2rem;">
@@ -273,8 +285,6 @@
     
 
  <section class="section" padding-top: 2rem; padding-bottom: 2rem;">
-  <h2 class="title is-3" style="text-align: center;">Why Reasoning Models Amplify Hallucinations?</h2>
-
   <div style="display: flex; justify-content: center;">
     <figure style="width: 90%; text-align: center;">
       <img 
@@ -284,7 +294,7 @@
         loading="lazy"
       />
       <figcaption style="font-size: 0.95rem; text-align: center; margin: 0.5rem auto 0; max-width: 90%;">
-          Attention shift in the reasoning model under different reasoning length. In normal thinking, the model generates outputs as typically expected, while in overthinking, the reasoning length is adjusted using Latent State Steering (Section&nbsp;<a href="#method">Method</a>). 
+          Attention shift in the reasoning model under different reasoning length. In normal thinking, the model generates outputs as typically expected, while in overthinking, the reasoning length is adjusted using Latent State Steering (Section&nbsp;<a href="#Section4">Method</a>). 
   <span style="font-style: italic;">
     Longer reasoning chains further exacerbate the degradation of attention to visual information and focus toward linguistic priors.
   </span>
@@ -292,6 +302,18 @@
     </figure>
   </div>
 </section>
+
+<div style="border: 2px solid #4A90E2; border-radius: 10px; overflow: hidden; width: fit-content; max-width: 100%;">
+  <div style="background-color: #A0C4EF; padding: 8px 12px; font-weight: bold; color: #1b4f91;">
+    Takeaway 2: Why Reasoning Models Amplify Hallucinations?
+  </div>
+  <div style="background-color: #E8F1FC; padding: 10px 15px; font-style: italic; border-top: 1px solid #4A90E2;">
+    <span>
+    The reduction of visual attention in reasoning models amplifies visual hallucinations. Longer reasoning chains further exacerbate the degradation of attention to visual information and focus toward linguistic priors.
+    </span>
+  </div>
+</div>
+
 
     
 <div class="columns is-centered has-text-centered" style="margin-top: -0.5rem;">
@@ -330,7 +352,7 @@
 
 <div style="border: 2px solid #4A90E2; border-radius: 10px; overflow: hidden; width: fit-content; max-width: 100%;">
   <div style="background-color: #A0C4EF; padding: 8px 12px; font-weight: bold; color: #1b4f91;">
-    Takeaway 2: Moderate Reasoning Length Strikes the Best Reasoning-Hallucination Balance
+    Takeaway 3: Moderate Reasoning Length Strikes the Best Reasoning-Hallucination Balance
   </div>
   <div style="background-color: #E8F1FC; padding: 10px 15px; font-style: italic; border-top: 1px solid #4A90E2;">
     <span>
