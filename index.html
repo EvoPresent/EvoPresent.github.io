@@ -143,7 +143,7 @@
 
 <section class="section" >
   <div style="display: flex; justify-content: center;">
-    <figure style="width: 50%; text-align: center; margin-left: 5%; margin-top: -35px;">
+    <figure style="width: 50%; text-align: center; margin-left: 5%; margin-top: -57px;">
       
  <img 
         src="./static/figure/intro.png" 
@@ -189,11 +189,11 @@
       <img 
         src="./static/figure/radar.png" 
         alt="image" 
-        style="width: 100%; height: auto;" 
+        style="width: 120%; height: auto;" 
         loading="lazy"
       />
       <figcaption style="font-size: 0.95rem; text-align: left; margin: 0.5rem auto 0; max-width: 90%;">
-        <!-- figcaption 内容 -->
+       Comparison of reasoning and non-reasoning models on five perception benchmarks. Results are shown for 3B models (left) and 7B models (right). Higher scores indicate lower hallucination.
       </figcaption>
     </figure>
   </div>
@@ -208,11 +208,14 @@
       <img 
         src="./static/figure/heatmap.png" 
         alt="image" 
-        style="width: 100%; height: auto;" 
+        style="width: 120%; height: auto;" 
         loading="lazy"
       />
       <figcaption style="font-size: 0.95rem; text-align: left; margin: 0.5rem auto 0; max-width: 90%;">
-        <!-- figcaption 内容 -->
+          Attention allocation and visual grounding between reasoning and non reasoning models. 
+  <span style="font-style: italic;">
+    The reduction of visual attention in reasoning models amplifies visual hallucinations.
+  </span>
       </figcaption>
     </figure>
   </div>
@@ -228,17 +231,18 @@
       <img 
         src="./static/figure/overthinking.png" 
         alt="image" 
-        style="width: 100%; height: auto;" 
+        style="width: 120%; height: auto;" 
         loading="lazy"
       />
       <figcaption style="font-size: 0.95rem; text-align: left; margin: 0.5rem auto 0; max-width: 90%;">
-        <!-- figcaption 内容 -->
+          Attention shift in the reasoning model under different reasoning length. In normal thinking, the model generates outputs as typically expected, while in overthinking, the reasoning length is adjusted using Latent State Steering (Section&nbsp;<a href="#method">Method</a>). 
+  <span style="font-style: italic;">
+    Longer reasoning chains further exacerbate the degradation of attention to visual information and focus toward linguistic priors.
+  </span>
       </figcaption>
     </figure>
   </div>
 </section>
-
-
 
     
 <div class="columns is-centered has-text-centered" style="margin-top: -0.5rem;">
@@ -256,11 +260,11 @@
       <img 
         src="./static/figure/length.png" 
         alt="image" 
-        style="width: 100%; height: auto;" 
+        style="width: 120%; height: auto;" 
         loading="lazy"
       />
       <figcaption style="font-size: 0.95rem; text-align: left; margin: 0.5rem auto 0; max-width: 90%;">
-        <!-- figcaption 内容 -->
+        Reasoning-Hallucination balance of multimodal reasoning models under varying reasoning lengths. Thinking lengths are controlled within [0–600] tokens for reasoning and [0–300] for hallucination, corresponding to the longer chains required for reasoning and shorter for hallucination.
       </figcaption>
     </figure>
   </div>
@@ -293,20 +297,29 @@
       <h2 class="title is-3">Evaluation on the Reasoning-Hallucination Balance</h2>
       </div>
       </div>
-    
-<section class="section"  style="background-color: #f2f2f2;">
-  <figure class="image is-centered" style="width: 100%; margin: 0 auto 2rem; text-align: center;">
-    <img 
-      src="./static/agent.png" 
-      alt="image" 
-      style="width: 100%; height: auto;" 
-      loading="lazy" 
-    />
-    <figcaption style="text-align: center;">
-      Figure 5. Workflow of our Multi-Agent framework for enhancing situational safety in user queries, incorporating Intent Reasoning, Safety Judgment, QA and Visual Understanding agents.
-    </figcaption>
-  </figure>
+
+
+<section class="section">
+  <div style="max-width: 1000px; margin: 0 auto; position: relative;">
+    <div id="carousel-track" style="display: flex; transition: transform 0.5s ease;">
+      <div class="carousel-item" style="min-width: 100%; text-align: center;">
+        <img src="./static/figure/heatmap.png" style="width: 90%;" />
+      </div>
+      <div class="carousel-item" style="min-width: 100%; text-align: center;">
+        <img src="./static/figure/intro.png" style="width: 90%;" />
+      </div>
+      <div class="carousel-item" style="min-width: 100%; text-align: center;">
+        <img src="./static/figure/overthinking.png" style="width: 90%;" />
+      </div>
+    </div>
+
+    <!-- 左右按钮 -->
+    <button onclick="prevSlide()" style="position: absolute; top: 45%; left: 0; background: none; border: none; font-size: 2rem;">❮</button>
+    <button onclick="nextSlide()" style="position: absolute; top: 45%; right: 0; background: none; border: none; font-size: 2rem;">❯</button>
+  </div>
 </section>
+    
+
 
 
 
