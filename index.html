@@ -298,9 +298,8 @@
       </div>
       </div>
 
-
 <section class="section">
-  <div style="max-width: 1000px; margin: 0 auto; position: relative;">
+  <div style="max-width: 1000px; margin: 0 auto; position: relative; overflow: hidden;">
     <div id="carousel-track" style="display: flex; transition: transform 0.5s ease;">
       <div class="carousel-item" style="min-width: 100%; text-align: center;">
         <img src="./static/figure/heatmap.png" style="width: 90%;" />
@@ -318,8 +317,26 @@
     <button onclick="nextSlide()" style="position: absolute; top: 45%; right: 0; background: none; border: none; font-size: 2rem;">❯</button>
   </div>
 </section>
-    
 
+<script>
+  let currentSlide = 0;
+  const track = document.getElementById("carousel-track");
+  const totalSlides = track.children.length;
+
+  function updateSlide() {
+    const offset = -currentSlide * 100;
+    track.style.transform = `translateX(${offset}%)`;
+  }
+
+  function nextSlide() {
+    currentSlide = (currentSlide + 1) % totalSlides;
+    updateSlide();
+  }
+
+  function prevSlide() {
+    currentSlide = (currentSlide - 1 + totalSlides) % totalSlides;
+    updateSlide();
+  }
 
 
 
