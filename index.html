@@ -152,7 +152,17 @@
       loading="lazy" 
     />
     <figcaption style="text-align: center;">
-      Figure 1. Illustration of multimodal situational safety. The model must judge the safety of the user's query or instruction based on the visual context and adjust their answer accordingly. Given an unsafe visual context, the model should remind the user of the potential risk instead of directly answering the user's query. However, current MLLMs struggle to achieve this in most unsafe situations.
+        <p>
+    <strong>(a)</strong> Example of outputs from a reasoning model and a non-reasoning model on a perception task. 
+    <span style="color: red;">Red highlights indicate visual hallucination.</span> 
+    <em>Multimodal reasoning models are generally more prone to amplifying hallucinations during the reasoning process compared to their non-reasoning counterparts.</em>
+  </p>
+  <p>
+    <strong>(b)</strong> Performance of different models on reasoning and perception tasks in the <em>RH-Bench</em> dataset. 
+    Better performing models are positioned in the upper right corner. 
+    <em>Baseline non-reasoning models of varying scales typically exhibit weaker reasoning capabilities and fewer hallucination, whereas reasoning models display the opposite trend.</em>
+  </p>
+      
     </figcaption>
   </figure>
 </section>
