@@ -23,15 +23,19 @@
   </script>
 
   <style>
-    /* 修复颜色为按钮默认样式（白色） */
-    .external-link,
-    .external-link span,
-    .external-link .icon,
-    .external-link .icon i {
-      color: inherit !important;
-    }
-  </style>
+  /* 作者名为蓝色 */
+  .publication-authors a {
+    color: #4ea3f1;
+  }
 
+  /* 修复按钮图标与文字颜色为按钮默认颜色（随 is-dark 样式） */
+  .external-link,
+  .external-link span,
+  .external-link .icon,
+  .external-link .icon i {
+    color: inherit !important;
+  }
+</style>
   
 
   <link href="https://fonts.googleapis.com/css?family=Google+Sans|Noto+Sans|Castoro"
@@ -54,41 +58,7 @@
 </head>
 <body>
 
-<!-- <nav class="navbar" role="navigation" aria-label="main navigation">
-  <div class="navbar-brand">
-    <a role="button" class="navbar-burger" aria-label="menu" aria-expanded="false">
-      <span aria-hidden="true"></span>
-      <span aria-hidden="true"></span>
-      <span aria-hidden="true"></span>
-    </a>
-  </div>
-  <div class="navbar-menu">
-    <div class="navbar-start" style="flex-grow: 1; justify-content: center;">
-      <a class="navbar-item" href="https://keunhong.com">
-      <span class="icon">
-          <i class="fas fa-home"></i>
-      </span>
-      </a> -->
 
-<!--       <div class="navbar-item has-dropdown is-hoverable">
-        <a class="navbar-link">
-          More Research
-        </a>
-        <div class="navbar-dropdown">
-          <a class="navbar-item" href="https://hypernerf.github.io">
-            HyperNeRF
-          </a>
-          <a class="navbar-item" href="https://nerfies.github.io">
-            Nerfies
-          </a>
-          <a class="navbar-item" href="https://latentfusion.github.io">
-            LatentFusion
-          </a>
-          <a class="navbar-item" href="https://photoshape.github.io">
-            PhotoShape
-          </a>
-        </div>
-      </div> -->
     </div>
 
   </div>
@@ -96,34 +66,7 @@
 
 
 <section class="hero">
-<!--   <div class="hero-body">
-    <div class="container is-max-desktop">
-      <div class="columns is-centered">
-        <div class="column has-text-centered">
-          <h1 class="title is-1 publication-title">More Thinking, Less Seeing? Assessing Amplified Hallucination in Multimodal Reasoning Models</h1>
-          <div class="is-size-5 publication-authors">
-            <span class="author-block">
-              <a href="">Chengzhi Liu*</a><sup>1</sup>,</span>
-            <span class="author-block">
-              <a href="">Zhongxing Xu*</a><sup>1</sup>,</span>
-            <span class="author-block">
-              <a href="">Qingyue Wei</a><sup>2</sup>,
-            </span>
-            <span class="author-block">
-              <a href="">Juncheng Wu</a><sup>1</sup>,
-            </span>
-            <span class="author-block">
-              <a href="">James Zou</a><sup>2</sup>,
-            </span>
-            <span class="author-block">
-              <a href="">Xin Eric Wang</a><sup>2</sup>,
-            </span>
-            <span class="author-block">
-              <a href="">Yuyin Zhou</a><sup>1</sup>,
-            </span>
-            <span class="author-block">
-              <a href="">Sheng Liu</a><sup>1</sup>,
-            </span> -->
+
   <div class="hero-body">
   <div class="container is-max-desktop">
     <div class="columns is-centered">
@@ -146,7 +89,6 @@
             </span>
           </div>
 
-          <!-- Bottom Row -->
           <div class="author-group">
             <span class="author-block">
               <a href="">James Zou</a><sup>2</sup>,
@@ -217,76 +159,10 @@
 <section class="hero teaser">
   <div class="container is-max-desktop">
     <div class="hero-body">
-<!--       <video id="teaser" autoplay muted loop playsinline height="100%">
-        <source src="./static/videos/teaser.mp4"
-                type="video/mp4">
-      </video> -->
-<!--       <h2 class="subtitle has-text-centered">
-        <span class="dnerf">Nerfies</span> turns selfie videos from your phone into
-        free-viewpoint
-        portraits.
-      </h2> -->
+
     </div>
   </div>
 </section>
-
-
-<!-- <section class="hero is-light is-small">
-  <div class="hero-body">
-    <div class="container">
-      <div id="results-carousel" class="carousel results-carousel">
-        <div class="item item-steve">
-<!--           <video poster="" id="steve" autoplay controls muted loop playsinline height="100%">
-            <source src="./static/videos/steve.mp4"
-                    type="video/mp4">
-          </video> -->
-<!--         </div>
-        <div class="item item-chair-tp">
-<!--           <video poster="" id="chair-tp" autoplay controls muted loop playsinline height="100%">
-            <source src="./static/videos/chair-tp.mp4"
-                    type="video/mp4">
-          </video> -->
-<!--         </div>
-        <div class="item item-shiba">
-<!--           <video poster="" id="shiba" autoplay controls muted loop playsinline height="100%">
-            <source src="./static/videos/shiba.mp4"
-                    type="video/mp4">
-          </video> -->
-<!--         </div>
-        <div class="item item-fullbody"> -->
-<!--           <video poster="" id="fullbody" autoplay controls muted loop playsinline height="100%">
-            <source src="./static/videos/fullbody.mp4"
-                    type="video/mp4">
-          </video> -->
-<!--         </div>
-        <div class="item item-blueshirt"> -->
-<!--           <video poster="" id="blueshirt" autoplay controls muted loop playsinline height="100%">
-            <source src="./static/videos/blueshirt.mp4"
-                    type="video/mp4">
-          </video> -->
-<!--         </div>
-        <div class="item item-mask"> -->
-<!--           <video poster="" id="mask" autoplay controls muted loop playsinline height="100%">
-            <source src="./static/videos/mask.mp4"
-                    type="video/mp4">
-          </video> -->
-<!--         </div>
-        <div class="item item-coffee"> -->
-<!--           <video poster="" id="coffee" autoplay controls muted loop playsinline height="100%">
-            <source src="./static/videos/coffee.mp4"
-                    type="video/mp4">
-          </video> -->
-<!--         </div>
-        <div class="item item-toby"> -->
-<!--           <video poster="" id="toby" autoplay controls muted loop playsinline height="100%">
-            <source src="./static/videos/toby2.mp4"
-                    type="video/mp4">
-          </video> -->
-<!--         </div>
-      </div>
-    </div>
-  </div>
-</section>  -->
 
 
 <section class="section">
