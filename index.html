@@ -51,10 +51,16 @@
     <div class="container is-max-desktop">
       <div class="columns is-centered">
         <div class="column has-text-centered">
-         <img src="./static/figure/logo1.png" alt="Logo" style="height: 120px;  margin-top: 6px;" />
-            <h1 class="title publication-title" style="font-size: 2.5rem; margin-top: 10px;">
-Presenting a Paper is an Art: Self-Improvement Aesthetic Agents for Academic Presentations 
-          </h1>
+          <div class="columns is-vcentered">
+            <div class="column is-narrow">
+              <img src="./static/images/logo.jpg" alt="Logo" style="height: 120px;" />
+            </div>
+            <div class="column">
+              <h1 class="title publication-title" style="font-size: 2.2rem; text-align: left; margin: 0;">
+<em>Presenting a Paper is an Art:</em> Self-Improvement Aesthetic Agents for Academic Presentations 
+              </h1>
+            </div>
+          </div>
 
 
   <div class="is-size-5 publication-authors">
@@ -89,7 +95,11 @@ Presenting a Paper is an Art: Self-Improvement Aesthetic Agents for Academic Pre
     </div>
 
 <div class="is-size-5 publication-authors" style="text-align: center;">
-  <sup>1</sup>UC Santa Barbara</span>, <sup>2</sup>UC Santa Cruz, <span><sup>3</sup>Orby AI
+  <sup>1</sup>UC Santa Barbara</span>, <sup>2</sup>UC Santa Cruz, <span><sup>3</sup>Uniphore
+</div>
+
+<div class="is-size-5 publication-authors" style="text-align: center; margin-top: 10px;">
+  <span class="author-block">*Equal contribution</span>
 </div>
 
           <div class="column has-text-centered">
@@ -121,7 +131,7 @@ Presenting a Paper is an Art: Self-Improvement Aesthetic Agents for Academic Pre
                   <span class="icon">
                       <i class="far fa-images"></i>
                   </span>
-                  <span>Benchmark</span>
+                  <span>Datasets</span>
                   </a>
             </div>
 
@@ -130,27 +140,102 @@ Presenting a Paper is an Art: Self-Improvement Aesthetic Agents for Academic Pre
       </div>
     </div>
   </div>
-</section>
 
-<section class="hero teaser" >
+<section class="section" id="abstract">
   <div class="container is-max-desktop">
-    <div class="hero-body">
-
+    <div class="columns is-centered has-text-centered">
+      <div class="column is-four-fifths">
+        <h2 class="title is-3">Abstract</h2>
+        <div class="content has-text-justified">
+          <p>
+            The promotion of academic papers has become an important means of enhancing research visibility. However, existing automated methods struggle with limited storytelling, insufficient aesthetic quality, and constrained self-adjustment, making it difficult to achieve efficient and engaging dissemination. At the heart of those challenges is a simple principle: <em>there is no way to improve it when you cannot evaluate it right</em>. To address this, we introduce <strong>EvoPresent</strong>, a self-improvement agent framework that unifies coherent narratives, aesthetic-aware designs, and realistic presentation delivery via virtual characters. Central to EvoPresent is <strong>PresAesth</strong>, a multi-task reinforcement learning (RL) aesthetic model that provides reliable aesthetic scoring, defect adjustment, and comparative feedback, enabling iterative self-improvement even under limited aesthetic training data. To systematically evaluate the methods, we introduce <strong>EvoPresent Benchmark</strong>, a comprehensive benchmark comprising: <em>Presentation Generation Quality</em>, built on 650 top-tier AI conference papers with multimodal resources (slides, videos and scripts) to assess both content and design; and <em>Aesthetic Awareness</em>, consisting of 2,000 slide pairs with varying aesthetic levels, supporting joint training and evaluation on scoring, defect adjustment, and comparison. Our findings highlight that (i) High-quality feedback is essential for agent self-improvement, while initial capability alone does not guarantee effective self-correction. (ii) Automated generation pipelines exhibit a trade-off between visual design and content construction. (iii) Multi-task RL training shows stronger generalization in aesthetic awareness tasks.
+          </p>
+        </div>
+      </div>
     </div>
   </div>
 </section>
 
+<section class="section" id="pipeline">
+  <div class="container is-max-desktop">
+    <div class="columns is-centered has-text-centered">
+      <div class="column is-four-fifths">
+        <h2 class="title is-3">EvoPresent Agent Pipeline</h2>
+        <div class="content has-text-justified">
+          <p>
+            <strong>Overview of the EvoPresent framework.</strong> <em>(a)</em> EvoPresent first performs content extraction and voice generation, then constructs the storyline and script, followed by content enhancement using image generation and knowledge retrieval. Design and rendering are handled next, and the aesthetic checker evaluates the initial slide and provides adjustments. <em>(b)</em> <strong>PresAesth</strong> is trained on a human-preference aesthetic dataset via multiple tasks (scoring, defect adjustment, and comparison). <em>(c)</em> The <strong>PresAesth</strong> model guides the agent framework in iterative self-improvement.
+          </p>
+        </div>
+        <div class="columns is-centered">
+          <div class="column is-full">
+            <img src="./static/images/pipeline.png" alt="EvoPresent Pipeline" style="width: 100%; height: auto; border-radius: 8px;">
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
 
+<section class="section" id="pipeline">
+  <div class="container is-max-desktop">
+    <div class="columns is-centered has-text-centered">
+      <div class="column is-four-fifths">
+        <h2 class="title is-3">Aesthetic Judgement for Self-Improvement</h2>
+      </div>
+    </div>
 
+    <div class="columns is-vcentered">
+      <div class="column is-6">
+        <img src="./static/images/checker.png" alt="EvoPresent Checker Agent Workflow" style="width: 100%; height: auto; border-radius: 8px;">
+      </div>
+      <div class="column is-6">
+        <div class="content has-text-justified">
+          <p>
+            The key to EvoPresent's high-quality output is its iterative "draft-feedback-refinement" cycle, which is managed by a dedicated <strong>Checker Agent</strong>. This agent acts as an AI design critic, leveraging our specialized aesthetic model, <strong>PresAesth</strong>, to evaluate and progressively refine the presentation.
+          </p>
+          <p>
+            At its core, <strong>PresAesth</strong> is a sophisticated model trained within a multi-task learning framework using <strong>Multi-Task Group Policy Optimization (GRPO)</strong> on a rich dataset of human aesthetic preferences. This unified training approach enables the model to simultaneously perform three distinct tasks from a single input: it assigns an absolute <strong>aesthetic score</strong>, identifies specific <strong>design defects</strong> such as poor layout or typography, and makes <strong>pairwise comparisons</strong> to determine the better of two slide versions. This multi-faceted feedback is crucial, as it powers the self-improvement loop and allows the framework to continuously polish its own work to a professional standard.
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
 
-    
+<section class="section" id="benchmark">
+  <div class="container is-max-desktop">
+    <div class="columns is-centered has-text-centered">
+      <div class="column is-four-fifths">
+        <h2 class="title is-3">EvoPresent Benchmark</h2>
+      </div>
+    </div>
+
+    <div class="columns is-centered">
+      <div class="column is-eight-fifths">
+        <img src="./static/images/dataset.png" alt="EvoPresent Benchmark Overview" style="width: 100%; height: auto; border-radius: 8px;">
+      </div>
+    </div>
+    <div class="columns is-centered">
+      <div class="column is-three-fifths">
+        <div class="content has-text-justified">
+    <p>
+      The EvoPresent Benchmark offers a comprehensive suite for evaluating both presentation generation and aesthetic models. Its <strong>data sources</strong> are twofold: first, curated materials from top-tier AI conferences, including slides, videos, and scripts; second, a specialized dataset of paired slides with varying aesthetic quality. Correspondingly, its <strong>evaluation metrics</strong> assess two key areas: <strong>content fidelity and design quality</strong> are measured against the conference materials, while the model's capabilities in <strong>absolute scoring, defect identification, and pairwise comparison</strong> are tested using the paired aesthetic slides. This structure enables rigorous and reproducible evaluation for both content generation and aesthetic judgment.
+    </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
 
 <section class="section" id="BibTeX">
   <div class="container content" style="max-width: 800px; margin: 0 auto;">
     <h2 class="title">BibTeX</h2>
-    <pre><code>
-
-</code></pre>
+    <pre><code>@article{liu2024presenting,
+  title={Presenting a Paper is an Art: Self-Improvement Aesthetic Agents for Academic Presentations},
+  author={Liu, Chengzhi and Yang, Yuezhe and Zhou, Kaiwen and Zhang, Zhen and Fan, Yue and Xie, Yanan and Qi, Peng and Wang, Xin Eric},
+  journal={arXiv preprint arXiv:},
+  year={2024}
+}</code></pre>
   </div>
 </section>
 
