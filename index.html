@@ -1,612 +1,1177 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-  <meta charset="utf-8">
-  <meta name="description"
-        content="Deformable Neural Radiance Fields creates free-viewpoint portraits (nerfies) from casually captured videos.">
-  <meta name="keywords" content="Nerfies, D-NeRF, NeRF">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Presenting a Paper is an Art: Self-Improvement Aesthetic Agents for Academic Presentations </title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="EvoPresent is a self-improvement aesthetic agent that generates academic presentations with coherent narratives, high-quality visuals, and virtual presenters.">
+    <meta name="keywords" content="EvoPresent, presentation generation, aesthetic agent, PresAesth, academic presentations">
+    <title>EvoPresent</title>
+    <link rel="icon" href="./static/images/logo.jpg">
 
-  <!-- Global site tag (gtag.js) - Google Analytics -->
-  <script async src="https://www.googletagmanager.com/gtag/js?id=G-PYVRSFMDRL"></script>
-  <script>
-    window.dataLayer = window.dataLayer || [];
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-PYVRSFMDRL"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'G-PYVRSFMDRL');
+    </script>
 
-    function gtag() {
-      dataLayer.push(arguments);
-    }
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500&family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 
-    gtag('js', new Date());
+    <style>
+        :root {
+            --theme-color: #0f5a88;
+            --theme-color-rgb: 15, 90, 136;
 
-    gtag('config', 'G-PYVRSFMDRL');
-  </script>
+            --bg: #ffffff;
+            --accent: var(--theme-color);
+            --accent-dim: rgba(var(--theme-color-rgb), 0.12);
+            --accent-glow: rgba(var(--theme-color-rgb), 0.25);
+            --cyan: #4bb3fd;
+            --text: #0f172a;
+            --text-muted: #5f6b86;
+            --border: rgba(var(--theme-color-rgb), 0.2);
+            --sidebar-width: 220px;
+        }
 
-  <link href="https://fonts.googleapis.com/css?family=Google+Sans|Noto+Sans|Castoro"
-        rel="stylesheet">
+        * {
+            box-sizing: border-box;
+        }
 
-  <link rel="stylesheet" href="./static/css/bulma.min.css">
-  <link rel="stylesheet" href="./static/css/bulma-carousel.min.css">
-  <link rel="stylesheet" href="./static/css/bulma-slider.min.css">
-  <link rel="stylesheet" href="./static/css/fontawesome.all.min.css">
-  <link rel="stylesheet"
-        href="https://cdn.jsdelivr.net/gh/jpswalsh/academicons@1/css/academicons.min.css">
-  <link rel="stylesheet" href="./static/css/index.css">
-  <link rel="icon" href="./static/figure/logo.png">
+        body {
+            margin: 0;
+            padding: 0;
+            min-height: 100vh;
+            background: var(--bg);
+            color: var(--text);
+            line-height: 1.7;
+            font-family: 'Outfit', sans-serif;
+        }
 
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-  <script defer src="./static/js/fontawesome.all.min.js"></script>
-  <script src="./static/js/bulma-carousel.min.js"></script>
-  <script src="./static/js/bulma-slider.min.js"></script>
-  <script src="./static/js/index.js"></script>
+        .layout {
+            max-width: 1240px;
+            margin: 0 auto;
+            display: flex;
+        }
+
+        .sidebar {
+            width: var(--sidebar-width);
+            flex-shrink: 0;
+            position: sticky;
+            top: 32px;
+            height: fit-content;
+            padding: 50px 0 0 24px;
+        }
+
+        .sidebar-logo {
+            margin-top: 24px;
+            padding-left: 12px;
+        }
+
+        .sidebar-logo img {
+            width: 40%;
+            height: auto;
+            display: block;
+            max-width: 120px;
+        }
+
+        .nav-title {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.75rem;
+            letter-spacing: 0.1em;
+            color: var(--text-muted);
+            margin-bottom: 12px;
+        }
+
+        .sidebar nav a {
+            display: block;
+            text-decoration: none;
+            color: var(--text-muted);
+            padding: 6px 0;
+            padding-left: 12px;
+            margin-left: -2px;
+            border-left: 2px solid transparent;
+            transition: color 0.2s, border-color 0.2s;
+        }
+
+        .sidebar nav a:hover,
+        .sidebar nav a.active {
+            color: var(--accent);
+            border-left-color: var(--accent);
+        }
+
+        .container {
+            flex: 1;
+            min-width: 0;
+            max-width: 940px;
+            padding: 50px 24px 80px 40px;
+        }
+
+        header {
+            text-align: left;
+            margin-bottom: 56px;
+            padding-bottom: 40px;
+            border-bottom: 1px solid var(--border);
+            position: relative;
+        }
+
+        header::after {
+            content: 'EvoPresent';
+            position: absolute;
+            bottom: -12px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: var(--bg);
+            padding: 0 16px;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.75rem;
+            letter-spacing: 0.24em;
+            color: var(--accent);
+        }
+
+        .award-badge {
+            display: table;
+            margin: 0 auto 10px;
+            border: 1px solid var(--border);
+            border-radius: 999px;
+            padding: 4px 14px;
+            color: var(--text-muted);
+            font-size: 0.86rem;
+        }
+
+        .award-badges {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+            justify-content: center;
+            margin-bottom: 10px;
+        }
+
+        .award-badges .award-badge {
+            margin: 0;
+        }
+
+        h1 {
+            margin: 0 0 16px;
+            font-size: 2.1rem;
+            font-weight: 600;
+            line-height: 1.3;
+            letter-spacing: -0.02em;
+        }
+
+        h1 .title-accent {
+            color: navy;
+        }
+
+        .authors {
+            font-size: 1.04rem;
+            margin-bottom: 8px;
+            color: var(--text-muted);
+        }
+
+        .authors a {
+            color: var(--accent);
+            text-decoration: none;
+            font-weight: 500;
+        }
+
+        .authors a:hover {
+            color: var(--cyan);
+            text-shadow: 0 0 20px var(--accent-glow);
+        }
+
+        .author-note {
+            margin-bottom: 12px;
+            color: var(--text-muted);
+            font-size: 0.86rem;
+            font-style: italic;
+        }
+
+        .affiliations {
+            text-align: left;
+            margin-bottom: 22px;
+        }
+
+        .affil-list {
+            display: flex;
+            justify-content: flex-start;
+            flex-wrap: wrap;
+            gap: 10px 28px;
+        }
+
+        .affil-item {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .affil-num {
+            color: var(--text-muted);
+            font-size: 0.8rem;
+        }
+
+        .affil-logo {
+            height: 2em;
+            width: auto;
+            max-height: 36px;
+            object-fit: contain;
+            vertical-align: middle;
+        }
+
+        .affil-name {
+            color: var(--text);
+            font-size: 0.9rem;
+            text-align: left;
+            line-height: 1.4;
+        }
+
+        .links {
+            display: flex;
+            justify-content: flex-start;
+            gap: 12px;
+            margin-top: 18px;
+            flex-wrap: wrap;
+        }
+
+        .links .btn {
+            border-radius: 999px;
+            padding: 6px 16px;
+            font-size: 0.84rem;
+            line-height: 1.1;
+            min-height: 38px;
+            display: inline-flex;
+            align-items: center;
+        }
+
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            text-decoration: none;
+            padding: 10px 20px;
+            border-radius: 6px;
+            font-size: 0.9rem;
+            font-weight: 500;
+            font-family: 'JetBrains Mono', monospace;
+            line-height: 1.2;
+            transition: box-shadow 0.3s, transform 0.2s, background 0.2s;
+            border: none;
+            cursor: pointer;
+            -webkit-appearance: none;
+            appearance: none;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, var(--accent) 0%, var(--cyan) 100%);
+            color: #fff;
+        }
+
+        .btn-outline {
+            background: transparent;
+            border: 1px solid var(--accent);
+            color: var(--accent);
+        }
+
+        .btn:hover {
+            box-shadow: 0 0 22px var(--accent-glow);
+            transform: translateY(-1px);
+        }
+
+        .btn-outline:hover {
+            background: var(--accent-dim);
+        }
+
+        .btn-gh,
+        .btn-arxiv {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .btn-arxiv img {
+            width: 18px;
+            height: 18px;
+            flex-shrink: 0;
+            filter: brightness(0) saturate(100%) invert(24%) sepia(28%) saturate(1405%) hue-rotate(173deg) brightness(88%) contrast(103%);
+        }
+
+        .btn-gh svg {
+            width: 18px;
+            height: 18px;
+            fill: currentColor;
+            flex-shrink: 0;
+        }
+
+        .hero-description {
+            margin: 20px auto 12px;
+            max-width: 860px;
+            color: var(--text-muted);
+            text-align: left;
+        }
+
+        section {
+            margin-bottom: 56px;
+        }
+
+        h2 {
+            margin: 0 0 20px;
+            font-size: 1.5rem;
+            font-weight: 600;
+            color: var(--text);
+            border-left: 3px solid var(--accent);
+            padding-left: 16px;
+            letter-spacing: -0.01em;
+        }
+
+        h3 {
+            margin: 28px 0 14px;
+            font-size: 1.15rem;
+            color: var(--cyan);
+            font-weight: 500;
+        }
+
+        h4 {
+            margin: 0 0 8px;
+            font-size: 1rem;
+            font-weight: 600;
+            color: var(--text);
+        }
+
+        p {
+            margin: 0 0 14px;
+            color: var(--text);
+            text-align: justify;
+        }
+
+        ul {
+            margin: 0 0 10px 1.1rem;
+            padding: 0;
+        }
+
+        .content-note {
+            color: var(--text-muted);
+            font-size: 0.9rem;
+        }
+
+        .section-lede {
+            color: var(--text-muted);
+            margin-bottom: 20px;
+        }
+
+        .figure-container {
+            text-align: center;
+            margin: 24px 0;
+        }
+
+        .figure-container img,
+        .figure-card img {
+            max-width: 100%;
+            height: auto;
+            display: block;
+            margin: 0 auto;
+        }
+
+        .figure-card {
+            margin: 24px 0;
+            text-align: center;
+        }
+
+        .figure-card img {
+            width: 100%;
+            max-width: 100%;
+            border-radius: 12px;
+        }
+
+        .caption {
+            margin-top: 10px;
+            font-size: 0.88rem;
+            color: var(--text-muted);
+            font-style: italic;
+            text-align: center;
+        }
+
+        .grid-3 {
+            display: grid;
+            grid-template-columns: repeat(3, minmax(0, 1fr));
+            gap: 14px;
+        }
+
+        .card {
+            border: 1px solid var(--border);
+            border-radius: 10px;
+            padding: 14px;
+            background: rgba(255, 255, 255, 0.82);
+            margin-bottom: 10px;
+        }
+
+        .tag-row {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+        }
+
+        .tag {
+            padding: 4px 10px;
+            border: 1px solid var(--border);
+            border-radius: 999px;
+            font-size: 0.84rem;
+            color: var(--text-muted);
+            background: var(--accent-dim);
+        }
+
+        .more-research {
+            position: relative;
+        }
+
+        .more-menu {
+            position: absolute;
+            top: calc(100% + 8px);
+            left: 0;
+            min-width: 220px;
+            background: #fff;
+            border: 1px solid var(--border);
+            border-radius: 10px;
+            padding: 6px;
+            box-shadow: 0 10px 24px rgba(15, 23, 42, 0.12);
+            display: none;
+            z-index: 20;
+        }
+
+        .more-menu.open {
+            display: block;
+        }
+
+        .more-menu a {
+            display: block;
+            padding: 8px 10px;
+            border-radius: 8px;
+            color: var(--text);
+            text-decoration: none;
+            font-size: 0.84rem;
+            font-family: 'Outfit', sans-serif;
+        }
+
+        .more-menu a:hover {
+            background: var(--accent-dim);
+            color: var(--accent);
+        }
+
+        .demo-grid {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        .demo-card {
+            border: 1px solid var(--border);
+            border-radius: 16px;
+            padding: 18px;
+            background: rgba(255, 255, 255, 0.92);
+            box-shadow: 0 20px 60px rgba(15, 23, 42, 0.05);
+        }
+
+        .demo-meta {
+            margin-bottom: 12px;
+        }
+
+        .demo-label {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.82rem;
+            color: var(--text-muted);
+            margin-bottom: 6px;
+        }
+
+        .demo-title {
+            font-size: 1.05rem;
+            font-weight: 600;
+            margin-bottom: 6px;
+        }
+
+        .media-pair {
+            display: grid;
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+            gap: 16px;
+        }
+
+        .media-box {
+            padding: 0;
+            background: transparent;
+        }
+
+        .media-title {
+            font-size: 0.9rem;
+            color: var(--text-muted);
+            margin-bottom: 8px;
+        }
+
+        .slide-embed,
+        .video-embed {
+            position: relative;
+            width: 100%;
+            padding-top: 56.25%;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 10px 24px rgba(15, 23, 42, 0.08);
+            background: #000;
+        }
+
+        .slide-embed iframe {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 300%;
+            height: 300%;
+            border: none;
+            transform: scale(0.33);
+            transform-origin: top left;
+        }
+
+        .video-embed video {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .carousel-shell {
+            position: relative;
+            border: 1px solid var(--border);
+            border-radius: 16px;
+            overflow: hidden;
+            box-shadow: 0 20px 60px rgba(15, 23, 42, 0.08);
+        }
+
+        .carousel-window {
+            width: 100%;
+            overflow: hidden;
+        }
+
+        .carousel-track {
+            display: flex;
+            transition: transform 0.5s ease;
+        }
+
+        .carousel-track img {
+            width: 100%;
+            flex: 0 0 100%;
+            object-fit: contain;
+        }
+
+        .carousel-nav {
+            position: absolute;
+            top: 50%;
+            width: 100%;
+            display: flex;
+            justify-content: space-between;
+            transform: translateY(-50%);
+        }
+
+        .carousel-btn {
+            background: rgba(15, 23, 42, 0.6);
+            border: none;
+            color: #fff;
+            padding: 10px 14px;
+            border-radius: 999px;
+            cursor: pointer;
+            margin: 0 12px;
+        }
+
+        .pipeline-layout {
+            display: flex;
+            flex-direction: column;
+            gap: 18px;
+        }
+
+        .aesthetics-row {
+            display: flex;
+            gap: 24px;
+            align-items: center;
+        }
+
+        .aesthetics-row > div {
+            flex: 1;
+        }
+
+        .citation-wrap {
+            position: relative;
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 16px;
+            background: rgba(248, 250, 252, 0.9);
+        }
+
+        .citation-wrap pre {
+            margin: 0;
+            overflow-x: auto;
+        }
+
+        .btn-copy {
+            position: absolute;
+            top: 12px;
+            right: 12px;
+            border: 1px solid var(--accent);
+            background: #fff;
+            color: var(--accent);
+            padding: 6px 12px;
+            border-radius: 999px;
+            font-family: 'JetBrains Mono', monospace;
+            cursor: pointer;
+        }
+
+        .btn-copy.copied {
+            background: var(--accent);
+            color: #fff;
+        }
+
+        footer {
+            border-top: 1px solid var(--border);
+            padding-top: 20px;
+            text-align: center;
+            color: var(--text-muted);
+            font-size: 0.85rem;
+        }
+
+        @media (max-width: 1024px) {
+            .layout {
+                flex-direction: column;
+                padding: 0 20px;
+            }
+
+            .sidebar {
+                position: static;
+                width: 100%;
+                padding: 24px 24px 0;
+                border-bottom: 1px solid var(--border);
+                padding-bottom: 16px;
+            }
+
+            .sidebar nav {
+                display: flex;
+                flex-wrap: wrap;
+                gap: 8px;
+            }
+
+            .sidebar nav a {
+                border-left: none;
+                padding-left: 0;
+                margin-left: 0;
+            }
+
+            .container {
+                padding: 32px 16px 60px;
+            }
+
+            .grid-3,
+            .media-pair {
+                grid-template-columns: 1fr;
+            }
+
+            .aesthetics-row {
+                flex-direction: column;
+            }
+        }
+
+        @media (max-width: 600px) {
+            h1 {
+                font-size: 1.62rem;
+            }
+
+            .links,
+            .affil-list {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+        }
+    </style>
 </head>
 <body>
-    </div>
-  </div>
-</nav>
-
-
-<section class="hero" >
-  <div class="hero-body">
-    <div class="container is-max-desktop">
-      <div class="columns is-centered">
-        <div class="column has-text-centered">
-          <div class="columns is-vcentered">
-            <div class="column is-narrow">
-              <img src="./static/images/logo.jpg" alt="Logo" style="height: 120px;" />
+    <nav class="navbar" style="display:none"></nav>
+    <div class="layout">
+        <aside class="sidebar">
+            <div class="nav-title">Contents</div>
+            <nav>
+                <a href="#home">Home</a>
+                <a href="#overview">Overview</a>
+                <a href="#pipeline">Pipeline</a>
+                <a href="#aesthetics">Aesthetics</a>
+                <a href="#benchmark">Benchmark</a>
+                <a href="#comparison">Comparison</a>
+                <a href="#demos">Demos</a>
+                <a href="#citation">Citation</a>
+            </nav>
+            <div class="sidebar-logo" aria-label="UCSB NLP">
+                <img src="logo/UCSB NLP.png" alt="UCSB NLP logo">
             </div>
-            <div class="column">
-              <h1 class="title publication-title" style="font-size: 2.2rem; text-align: left; margin: 0;">
-<em>Presenting a Paper is an Art:</em> Self-Improvement Aesthetic Agents for Academic Presentations 
-              </h1>
-            </div>
-          </div>
+        </aside>
 
+        <main class="container">
+            <header id="home">
+                <div class="award-badges">
+                    <div class="award-badge">ICLR 2026</div>
+                </div>
+                <h1><span class="title-accent">Presenting a Paper is an Art: </span> Self-Improvement Aesthetic Agents for Academic Presentations</h1>
 
-  <div class="is-size-5 publication-authors">
-  <div>
-    <span class="author-block">
-      <a href="">Chengzhi Liu*</a><sup>1</sup>,
-    </span>
-    <span class="author-block">
-      <a href="">Yuezhe Yang*</a><sup>1</sup>,
-    </span>
-    <span class="author-block">
-      <a href="">Kaiwen Zhou</a><sup>2</sup>,
-    </span>
-    <span class="author-block">
-      <a href="">Zhen Zhang</a><sup>1</sup>,
-    </span>
-  </div>
-  <div>
-    <span class="author-block">
-      <a href="">Yue Fan</a><sup>2</sup>,
-    </span>
-    <span class="author-block">
-      <a href="">Yanan Xie</a><sup>3</sup>,
-    </span>
-    <span class="author-block">
-      <a href="">Peng Qi</a><sup>3</sup>,
-    </span>
-    <span class="author-block">
-      <a href="">Xin Eric Wang</a><sup>1</sup>
-    </span>
-  </div>
-    </div>
+                <div class="authors">
+                    <span>Chengzhi Liu<sup>1,*</sup></span>,
+                    <span>Yuzhe Yang<sup>1,*</sup></span>,
+                    <span>Kaiwen Zhou<sup>2</sup></span>,
+                    <span>Zhen Zhang<sup>1</sup></span>,
+                    <span>Yue Fan<sup>2</sup></span>,
+                    <span>Yanan Xie<sup>3</sup></span>,
+                    <span>Peng Qi<sup>3</sup></span>,
+                    <span>Xin Eric Wang<sup>1</sup></span>
+                </div>
+                <div class="author-note"><sup>*</sup> Equal contribution</div>
 
-<div class="is-size-5 publication-authors" style="text-align: center;">
-  <sup>1</sup>UC Santa Barbara</span>, <sup>2</sup>UC Santa Cruz, <span><sup>3</sup>Uniphore
-</div>
+                <div class="affiliations">
+                    <div class="affil-list">
+                        <div class="affil-item">
+                            <span class="affil-num">1</span>
+                            <img src="logo/ucsb.png" alt="UC Santa Barbara" class="affil-logo">
+                            <span class="affil-name">UC Santa Barbara</span>
+                        </div>
+                        <div class="affil-item">
+                            <span class="affil-num">2</span>
+                            <img src="logo/ucsc.png" alt="UC Santa Cruz" class="affil-logo">
+                            <span class="affil-name">UC Santa Cruz</span>
+                        </div>
+                        <div class="affil-item">
+                            <span class="affil-num">3</span>
+                            <img src="logo/uniphore.jpg" alt="Uniphore" class="affil-logo">
+                            <span class="affil-name">Uniphore</span>
+                        </div>
+                    </div>
+                </div>
 
-<div class="is-size-5 publication-authors" style="text-align: center; margin-top: 10px;">
-  <span class="author-block">*Equal contribution</span>
-</div>
+                <div class="links">
+                    <a href="https://arxiv.org/abs/2510.05571" class="btn btn-outline btn-arxiv" target="_blank" rel="noopener">
+                        <img src="https://arxiv.org/static/browse/0.3.4/images/arxiv-logomark-small-white.svg" alt="arXiv">
+                        arXiv
+                    </a>
+                    <a href="https://github.com/eric-ai-lab/EvoPresent" class="btn btn-outline btn-gh" target="_blank" rel="noopener">
+                        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/></svg>
+                        Code
+                    </a>
+                    <a href="https://huggingface.co/datasets/TobyYang7/EvoPresent" class="btn btn-outline" target="_blank" rel="noopener">🗂️ Dataset</a>
+                    <a href="#demos" class="btn btn-outline">▶️ Demo</a>
+                    <a href="#citation" class="btn btn-outline">📝 BibTeX</a>
+                    <div class="more-research">
+                        <button type="button" class="btn btn-outline" id="moreResearchBtn">🔎 More Research</button>
+                        <div class="more-menu" id="moreResearchMenu" role="menu" aria-label="More Research Links">
+                            <a href="https://mllm-dmlr.github.io/" target="_blank" rel="noopener">DMLR (CVPR 2026)</a>
+                        </div>
+                    </div>
+                </div>
 
-          <div class="column has-text-centered">
-            <div class="publication-links">
-              <!-- PDF Link. -->
-              <span class="link-block">
-                <a href="https://arxiv.org/pdf/2510.05571"
-                   class="external-link button is-normal is-rounded is-dark">
-                  <span class="icon">
-                      <i class="fas fa-file-pdf"></i>
-                  </span>
-                  <span>Paper</span>
-                </a>
-              </span>
-              <!-- Code Link. -->
-              <span class="link-block">
-                <a href="https://github.com/eric-ai-lab/EvoPresent"
-                   class="external-link button is-normal is-rounded is-dark">
-                  <span class="icon">
-                      <i class="fab fa-github"></i>
-                  </span>
-                  <span>Code</span>
-                  </a>
-              </span>
-              <!-- Dataset Link. -->
-              <span class="link-block">
-                <a href="https://huggingface.co/datasets/TobyYang7/EvoPresent"
-                   class="external-link button is-normal is-rounded is-dark">
-                  <span class="icon">
-                      <i class="far fa-images"></i>
-                  </span>
-                  <span>Datasets</span>
-                  </a>
-              </span>
-              <!-- Demo Link. -->
-              <span class="link-block">
-                <a href="#demo"
-                   class="external-link button is-normal is-rounded is-dark">
-                  <span class="icon">
-                      <i class="fas fa-play"></i>
-                  </span>
-                  <span>Demo</span>
-                  </a>
-              </span>
-            </div>
+                <p class="hero-description">
+                    EvoPresent unifies coherent storytelling, aesthetic-aware slide design, and lifelike talking-head delivery. A dedicated Checker Agent, powered by the PresAesth multi-task reinforcement learning model, critiques every draft and guides iterative self-improvement, enabling reliable and engaging academic presentations from only raw paper materials.
+                </p>
 
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
+            </header>
 
-<section class="section" id="abstract">
-  <div class="container is-max-desktop">
-    <div class="columns is-centered has-text-centered">
-      <div class="column is-four-fifths">
-        <h2 class="title is-3">Abstract</h2>
-        <div class="content has-text-justified">
-          <p>
-            The promotion of academic papers has become an important means of enhancing research visibility. However, existing automated methods struggle with limited storytelling, insufficient aesthetic quality, and constrained self-adjustment, making it difficult to achieve efficient and engaging dissemination. At the heart of those challenges is a simple principle: <em>there is no way to improve it when you cannot evaluate it right</em>. To address this, we introduce <strong>EvoPresent</strong>, a self-improvement agent framework that unifies coherent narratives, aesthetic-aware designs, and realistic presentation delivery via virtual characters. Central to EvoPresent is <strong>PresAesth</strong>, a multi-task reinforcement learning (RL) aesthetic model that provides reliable aesthetic scoring, defect adjustment, and comparative feedback, enabling iterative self-improvement even under limited aesthetic training data. To systematically evaluate the methods, we introduce <strong>EvoPresent Benchmark</strong>, a comprehensive benchmark comprising: <em>Presentation Generation Quality</em>, built on 650 top-tier AI conference papers with multimodal resources (slides, videos and scripts) to assess both content and design; and <em>Aesthetic Awareness</em>, consisting of 2,000 slide pairs with varying aesthetic levels, supporting joint training and evaluation on scoring, defect adjustment, and comparison. Our findings highlight that (i) High-quality feedback is essential for agent self-improvement, while initial capability alone does not guarantee effective self-correction. (ii) Automated generation pipelines exhibit a trade-off between visual design and content construction. (iii) Multi-task RL training shows stronger generalization in aesthetic awareness tasks.
-          </p>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
+            <section id="overview">
+                <h2>Overview</h2>
+                <p>
+                    The promotion of academic papers has become an important means of enhancing research visibility. However, existing automated methods struggle with limited storytelling, insufficient aesthetic quality, and constrained self-adjustment. EvoPresent addresses these limitations with a self-improvement agent that unifies coherent narratives, aesthetic-aware designs, and realistic presentation delivery via virtual characters. Central to EvoPresent is <strong>PresAesth</strong>, a multi-task reinforcement learning aesthetic model that supplies reliable scoring, defect adjustment, and comparative feedback so the agent can iteratively refine its output even with limited training data. To systematically evaluate end-to-end systems, we also introduce the <strong>EvoPresent Benchmark</strong>, featuring (i) Presentation Generation Quality, covering 650 top-tier AI conference papers with multimodal resources, and (ii) Aesthetic Awareness, containing 2,000 slide pairs with varying quality to support joint training and evaluation.
+                </p>
+                <div class="grid-3">
+                    <div class="card">
+                        <h4>High-quality feedback matters</h4>
+                        <p>Strong initial capability alone cannot guarantee effective self-correction; the PresAesth critic is essential for meaningful improvements.</p>
+                    </div>
+                    <div class="card">
+                        <h4>Design vs. content trade-off</h4>
+                        <p>Automated pipelines often sacrifice layout polish for factual coverage. EvoPresent balances both objectives within a single agent loop.</p>
+                    </div>
+                    <div class="card">
+                        <h4>Multi-task RL generalization</h4>
+                        <p>Training PresAesth jointly on scoring, defect adjustment, and pairwise comparison yields better aesthetic awareness than single-task baselines.</p>
+                    </div>
+                </div>
+            </section>
 
+            <section id="pipeline">
+                <h2>💻 EvoPresent Agent Pipeline</h2>
+                <div class="pipeline-layout">
+                        <p>
+                            <strong>Overview of the EvoPresent framework.</strong> (a) EvoPresent first performs content extraction and voice generation, then constructs the storyline and script, followed by content enhancement using image generation and knowledge retrieval. Design and rendering are handled next, and the aesthetic checker evaluates the initial slide and provides adjustments. (b) <strong>PresAesth</strong> is trained on a human-preference aesthetic dataset via multiple tasks (scoring, defect adjustment, and comparison). (c) The <strong>PresAesth</strong> model guides the agent framework in iterative self-improvement.
+                        </p>
+                    <div class="figure-card">
+                        <img src="./static/images/pipeline.png" alt="EvoPresent pipeline diagram">
+                        <p class="caption">The complete agent loop stage-by-stage.</p>
+                    </div>
+                </div>
+            </section>
 
+            <section id="aesthetics">
+                <h2>✨ Aesthetic Judgement for Self-Improvement</h2>
+                <div class="aesthetics-row">
+                    <div class="figure-card">
+                        <img src="./static/images/checker.png" alt="PresAesth checker workflow">
+                        <p class="caption">Checker Agent powered by PresAesth.</p>
+                    </div>
+                    <div>
+                        <p>
+                            EvoPresent's high-quality output is driven by an iterative "draft → feedback → refinement" cycle supervised by a dedicated <strong>Checker Agent</strong>. The checker leverages <strong>PresAesth</strong>, a multi-task aesthetic model trained with Multi-Task Group Policy Optimization (GRPO) on human preference data. A single pass through PresAesth yields an absolute aesthetic score, identifies concrete defects (e.g., layout imbalance or typography issues), and compares competing slide candidates. This compound signal unlocks self-directed improvements without relying on expensive human-in-the-loop reviews.
+                        </p>
+                    </div>
+                </div>
+            </section>
 
-<section class="section" id="demo">
-  <div class="container is-max-desktop">
-    <div class="columns is-centered has-text-centered">
-      <div class="column is-four-fifths">
-        <h2 class="title is-3">🎥 Demo</h2>
-      </div>
-    </div>
+            <section id="benchmark">
+                <h2>EvoPresent Benchmark</h2>
+                <div class="figure-card">
+                    <img src="./static/images/dataset.png" alt="EvoPresent benchmark overview">
+                    <p class="caption">Evaluation protocol spanning generation quality and aesthetic awareness.</p>
+                </div>
+                <p>
+                    The EvoPresent Benchmark offers a comprehensive suite for evaluating both presentation generation and aesthetic models. Its data sources are twofold: curated materials from top-tier AI conferences (slides, videos, and scripts) and a specialized dataset of paired slides with varying aesthetic quality. Correspondingly, its evaluation metrics assess (i) content fidelity and design quality measured against conference materials, and (ii) the model's capabilities in absolute scoring, defect identification, and pairwise comparison using the paired aesthetic slides. This structure enables rigorous and reproducible evaluation for both content generation and aesthetic judgment.
+                </p>
+            </section>
 
+            <section id="comparison">
+                <h2>🎨 Aesthetic Comparison</h2>
+                <p class="section-lede">Side-by-side comparisons highlight PresAesth guidance on layout balance, typography, and iconography.</p>
+                <div class="carousel-shell">
+                    <div class="carousel-window">
+                        <div class="carousel-track" id="compareTrack">
+                            <img src="./static/images/compare.jpg" alt="Comparison slide 1">
+                            <img src="./static/images/pre.png" alt="Comparison slide 2">
+                            <img src="./static/images/poster.png" alt="Comparison slide 3">
+                        </div>
+                    </div>
+                    <div class="carousel-nav">
+                        <button class="carousel-btn" id="comparePrev" aria-label="Previous slide">&#10094;</button>
+                        <button class="carousel-btn" id="compareNext" aria-label="Next slide">&#10095;</button>
+                    </div>
+                </div>
+            </section>
 
+            <section id="demos">
+                <h2>Interactive Demos</h2>
+                <p class="section-lede">Nine paired demos showcase slide interactivity and synchronized talking-head delivery. Each video is generated directly from the EvoPresent pipeline using the same script as the interactive deck.</p>
+                <div class="demo-grid">
+                    <div class="demo-card">
+                        <div class="demo-meta">
+                            <div class="demo-label">Demo 0</div>
+                        </div>
+                        <div class="media-pair">
+                            <div class="media-box">
+                                <div class="media-title">Slides</div>
+                                <div class="slide-embed">
+                                    <iframe src="./example/demo0.html" title="EvoPresent Interactive Demo 0"></iframe>
+                                </div>
+                            </div>
+                            <div class="media-box">
+                                <div class="media-title">Presenter Video</div>
+                                <div class="video-embed">
+                                    <video controls poster="./example/demo0.mp4#t=0.1" preload="metadata">
+                                        <source src="./example/demo0.mp4" type="video/mp4">
+                                    </video>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
 
-    <div class="columns is-vcentered">
-      <div class="column is-6">
-        <div class="content has-text-centered">
-          <h3 class="title is-4">Interactive Demo</h3>
-          <p>
-            Interactive slide interface generated by EvoPresent with real-time navigation and exploration capabilities.
-          </p>
-        </div>
-        <div style="position: relative; width: 100%; aspect-ratio: 16/9; border-radius: 8px; overflow: hidden; box-shadow: 0 4px 8px rgba(0,0,0,0.1);">
-          <iframe src="./example/demo0.html" 
-                  style="width: 300%; height: 300%; border: none; transform: scale(0.33); transform-origin: top left;"
-                  title="EvoPresent Interactive Demo 0">
-          </iframe>
-        </div>
-      </div>
-      <div class="column is-6">
-        <div class="content has-text-centered">
-          <h3 class="title is-4">Video Demonstration</h3>
-          <p>
-            Generated video featuring virtual presenter delivering academic content with natural gestures and speech.
-          </p>
-        </div>
-        <div style="position: relative; width: 100%; aspect-ratio: 16/9; border-radius: 8px; overflow: hidden; box-shadow: 0 4px 8px rgba(0,0,0,0.1);">
-          <video controls 
-                 style="width: 100%; height: 100%; object-fit: cover;"
-                 poster="./example/demo0.mp4#t=0.1"
-                 preload="metadata">
-            <source src="./example/demo0.mp4" type="video/mp4">
-            Your browser does not support the video tag.
-          </video>
-        </div>
-      </div>
-    </div>
+                    <div class="demo-card">
+                        <div class="demo-meta">
+                            <div class="demo-label">Demo 1</div>
+                        </div>
+                        <div class="media-pair">
+                            <div class="media-box">
+                                <div class="media-title">Slides</div>
+                                <div class="slide-embed">
+                                    <iframe src="./example/demo1.html" title="EvoPresent Interactive Demo 1"></iframe>
+                                </div>
+                            </div>
+                            <div class="media-box">
+                                <div class="media-title">Presenter Video</div>
+                                <div class="video-embed">
+                                    <video controls poster="./example/demo1.mp4#t=0.1" preload="metadata">
+                                        <source src="./example/demo1.mp4" type="video/mp4">
+                                    </video>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
 
-    <div class="columns is-vcentered" style="margin-top: 2rem;">
-      <div class="column is-6">
-        <div style="position: relative; width: 100%; aspect-ratio: 16/9; border-radius: 8px; overflow: hidden; box-shadow: 0 4px 8px rgba(0,0,0,0.1);">
-          <iframe src="./example/demo1.html" 
-                  style="width: 300%; height: 300%; border: none; transform: scale(0.33); transform-origin: top left;"
-                  title="EvoPresent Interactive Demo 1">
-          </iframe>
-        </div>
-      </div>
-      <div class="column is-6">
-        
-        <div style="position: relative; width: 100%; aspect-ratio: 16/9; border-radius: 8px; overflow: hidden; box-shadow: 0 4px 8px rgba(0,0,0,0.1);">
-          <video controls 
-                 style="width: 100%; height: 100%; object-fit: cover;"
-                 poster="./example/demo1.mp4#t=0.1"
-                 preload="metadata">
-            <source src="./example/demo1.mp4" type="video/mp4">
-            Your browser does not support the video tag.
-          </video>
-        </div>
-      </div>
-    </div>
+                    <div class="demo-card">
+                        <div class="demo-meta">
+                            <div class="demo-label">Demo 2</div>
+                        </div>
+                        <div class="media-pair">
+                            <div class="media-box">
+                                <div class="media-title">Slides</div>
+                                <div class="slide-embed">
+                                    <iframe src="./example/demo2.html" title="EvoPresent Interactive Demo 2"></iframe>
+                                </div>
+                            </div>
+                            <div class="media-box">
+                                <div class="media-title">Presenter Video</div>
+                                <div class="video-embed">
+                                    <video controls poster="./example/demo2.mp4#t=0.1" preload="metadata">
+                                        <source src="./example/demo2.mp4" type="video/mp4">
+                                    </video>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
 
-    <div class="columns is-vcentered" style="margin-top: 2rem;">
-      <div class="column is-6">
-        <div style="position: relative; width: 100%; aspect-ratio: 16/9; border-radius: 8px; overflow: hidden; box-shadow: 0 4px 8px rgba(0,0,0,0.1);">
-          <iframe src="./example/demo2.html" 
-                  style="width: 300%; height: 300%; border: none; transform: scale(0.33); transform-origin: top left;"
-                  title="EvoPresent Interactive Demo 2">
-          </iframe>
-        </div>
-      </div>
-      <div class="column is-6">
-        <div style="position: relative; width: 100%; aspect-ratio: 16/9; border-radius: 8px; overflow: hidden; box-shadow: 0 4px 8px rgba(0,0,0,0.1);">
-          <video controls 
-                 style="width: 100%; height: 100%; object-fit: cover;"
-                 poster="./example/demo2.mp4#t=0.1"
-                 preload="metadata">
-            <source src="./example/demo2.mp4" type="video/mp4">
-            Your browser does not support the video tag.
-          </video>
-        </div>
-      </div>
-    </div>
+                    <div class="demo-card">
+                        <div class="demo-meta">
+                            <div class="demo-label">Demo 3</div>
+                        </div>
+                        <div class="media-pair">
+                            <div class="media-box">
+                                <div class="media-title">Slides</div>
+                                <div class="slide-embed">
+                                    <iframe src="./example/demo3.html" title="EvoPresent Interactive Demo 3"></iframe>
+                                </div>
+                            </div>
+                            <div class="media-box">
+                                <div class="media-title">Presenter Video</div>
+                                <div class="video-embed">
+                                    <video controls poster="./example/demo3.mp4#t=0.1" preload="metadata">
+                                        <source src="./example/demo3.mp4" type="video/mp4">
+                                    </video>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
 
-    <div class="columns is-vcentered" style="margin-top: 2rem;">
-      <div class="column is-6">
-        <div style="position: relative; width: 100%; aspect-ratio: 16/9; border-radius: 8px; overflow: hidden; box-shadow: 0 4px 8px rgba(0,0,0,0.1);">
-          <iframe src="./example/demo3.html" 
-                  style="width: 300%; height: 300%; border: none; transform: scale(0.33); transform-origin: top left;"
-                  title="EvoPresent Interactive Demo 3">
-          </iframe>
-        </div>
-      </div>
-      <div class="column is-6">
-        <div style="position: relative; width: 100%; aspect-ratio: 16/9; border-radius: 8px; overflow: hidden; box-shadow: 0 4px 8px rgba(0,0,0,0.1);">
-          <video controls 
-                 style="width: 100%; height: 100%; object-fit: cover;"
-                 poster="./example/demo3.mp4#t=0.1"
-                 preload="metadata">
-            <source src="./example/demo3.mp4" type="video/mp4">
-            Your browser does not support the video tag.
-          </video>
-        </div>
-      </div>
-    </div>
+                    <div class="demo-card">
+                        <div class="demo-meta">
+                            <div class="demo-label">Demo 4</div>
+                        </div>
+                        <div class="media-pair">
+                            <div class="media-box">
+                                <div class="media-title">Slides</div>
+                                <div class="slide-embed">
+                                    <iframe src="./example/demo4.html" title="EvoPresent Interactive Demo 4"></iframe>
+                                </div>
+                            </div>
+                            <div class="media-box">
+                                <div class="media-title">Presenter Video</div>
+                                <div class="video-embed">
+                                    <video controls poster="./example/demo4.mp4#t=0.1" preload="metadata">
+                                        <source src="./example/demo4.mp4" type="video/mp4">
+                                    </video>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
 
-    <div class="columns is-vcentered" style="margin-top: 2rem;">
-      <div class="column is-6">
-        <div style="position: relative; width: 100%; aspect-ratio: 16/9; border-radius: 8px; overflow: hidden; box-shadow: 0 4px 8px rgba(0,0,0,0.1);">
-          <iframe src="./example/demo4.html" 
-                  style="width: 300%; height: 300%; border: none; transform: scale(0.33); transform-origin: top left;"
-                  title="EvoPresent Interactive Demo 4">
-          </iframe>
-        </div>
-      </div>
-      <div class="column is-6">
-        <div style="position: relative; width: 100%; aspect-ratio: 16/9; border-radius: 8px; overflow: hidden; box-shadow: 0 4px 8px rgba(0,0,0,0.1);">
-          <video controls 
-                 style="width: 100%; height: 100%; object-fit: cover;"
-                 poster="./example/demo4.mp4#t=0.1"
-                 preload="metadata">
-            <source src="./example/demo4.mp4" type="video/mp4">
-            Your browser does not support the video tag.
-          </video>
-        </div>
-      </div>
-    </div>
+                    <div class="demo-card">
+                        <div class="demo-meta">
+                            <div class="demo-label">Demo 5</div>
+                        </div>
+                        <div class="media-pair">
+                            <div class="media-box">
+                                <div class="media-title">Slides</div>
+                                <div class="slide-embed">
+                                    <iframe src="./example/demo5.html" title="EvoPresent Interactive Demo 5"></iframe>
+                                </div>
+                            </div>
+                            <div class="media-box">
+                                <div class="media-title">Presenter Video</div>
+                                <div class="video-embed">
+                                    <video controls poster="./example/demo5.mp4#t=0.1" preload="metadata">
+                                        <source src="./example/demo5.mp4" type="video/mp4">
+                                    </video>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
 
-    <div class="columns is-vcentered" style="margin-top: 2rem;">
-      <div class="column is-6">
-        <div style="position: relative; width: 100%; aspect-ratio: 16/9; border-radius: 8px; overflow: hidden; box-shadow: 0 4px 8px rgba(0,0,0,0.1);">
-          <iframe src="./example/demo5.html" 
-                  style="width: 300%; height: 300%; border: none; transform: scale(0.33); transform-origin: top left;"
-                  title="EvoPresent Interactive Demo 5">
-          </iframe>
-        </div>
-      </div>
-      <div class="column is-6">
-        <div style="position: relative; width: 100%; aspect-ratio: 16/9; border-radius: 8px; overflow: hidden; box-shadow: 0 4px 8px rgba(0,0,0,0.1);">
-          <video controls 
-                 style="width: 100%; height: 100%; object-fit: cover;"
-                 poster="./example/demo5.mp4#t=0.1"
-                 preload="metadata">
-            <source src="./example/demo5.mp4" type="video/mp4">
-            Your browser does not support the video tag.
-          </video>
-        </div>
-      </div>
-    </div>
+                    <div class="demo-card">
+                        <div class="demo-meta">
+                            <div class="demo-label">Demo 6</div>
+                        </div>
+                        <div class="media-pair">
+                            <div class="media-box">
+                                <div class="media-title">Slides</div>
+                                <div class="slide-embed">
+                                    <iframe src="./example/demo6_multilevel.html" title="EvoPresent Interactive Demo 6"></iframe>
+                                </div>
+                            </div>
+                            <div class="media-box">
+                                <div class="media-title">Presenter Video</div>
+                                <div class="video-embed">
+                                    <video controls poster="./example/demo6_multilevel.mp4#t=0.1" preload="metadata">
+                                        <source src="./example/demo6_multilevel.mp4" type="video/mp4">
+                                    </video>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
 
-    <div class="columns is-vcentered" style="margin-top: 2rem;">
-      <div class="column is-6">
-        <div style="position: relative; width: 100%; aspect-ratio: 16/9; border-radius: 8px; overflow: hidden; box-shadow: 0 4px 8px rgba(0,0,0,0.1);">
-          <iframe src="./example/demo6_multilevel.html" 
-                  style="width: 300%; height: 300%; border: none; transform: scale(0.33); transform-origin: top left;"
-                  title="EvoPresent Interactive Demo 6 - Multilevel">
-          </iframe>
-        </div>
-      </div>
-      <div class="column is-6">
-        <div style="position: relative; width: 100%; aspect-ratio: 16/9; border-radius: 8px; overflow: hidden; box-shadow: 0 4px 8px rgba(0,0,0,0.1);">
-          <video controls 
-                 style="width: 100%; height: 100%; object-fit: cover;"
-                 poster="./example/demo6_multilevel.mp4#t=0.1"
-                 preload="metadata">
-            <source src="./example/demo6_multilevel.mp4" type="video/mp4">
-            Your browser does not support the video tag.
-          </video>
-        </div>
-      </div>
-    </div>
+                    <div class="demo-card">
+                        <div class="demo-meta">
+                            <div class="demo-label">Demo 7</div>
+                        </div>
+                        <div class="media-pair">
+                            <div class="media-box">
+                                <div class="media-title">Slides</div>
+                                <div class="slide-embed">
+                                    <iframe src="./example/demo7_vlm.html" title="EvoPresent Interactive Demo 7"></iframe>
+                                </div>
+                            </div>
+                            <div class="media-box">
+                                <div class="media-title">Presenter Video</div>
+                                <div class="video-embed">
+                                    <video controls poster="./example/demo7_vlm.mp4#t=0.1" preload="metadata">
+                                        <source src="./example/demo7_vlm.mp4" type="video/mp4">
+                                    </video>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
 
-    <div class="columns is-vcentered" style="margin-top: 2rem;">
-      <div class="column is-6">
-        <div style="position: relative; width: 100%; aspect-ratio: 16/9; border-radius: 8px; overflow: hidden; box-shadow: 0 4px 8px rgba(0,0,0,0.1);">
-          <iframe src="./example/demo7_vlm.html" 
-                  style="width: 300%; height: 300%; border: none; transform: scale(0.33); transform-origin: top left;"
-                  title="EvoPresent Interactive Demo 7 - VLM">
-          </iframe>
-        </div>
-      </div>
-      <div class="column is-6">
-        <div style="position: relative; width: 100%; aspect-ratio: 16/9; border-radius: 8px; overflow: hidden; box-shadow: 0 4px 8px rgba(0,0,0,0.1);">
-          <video controls 
-                 style="width: 100%; height: 100%; object-fit: cover;"
-                 poster="./example/demo7_vlm.mp4#t=0.1"
-                 preload="metadata">
-            <source src="./example/demo7_vlm.mp4" type="video/mp4">
-            Your browser does not support the video tag.
-          </video>
-        </div>
-      </div>
-    </div>
+                    <div class="demo-card">
+                        <div class="demo-meta">
+                            <div class="demo-label">Demo 8</div>
+                        </div>
+                        <div class="media-pair">
+                            <div class="media-box">
+                                <div class="media-title">Slides</div>
+                                <div class="slide-embed">
+                                    <iframe src="./example/demo8_unifying.html" title="EvoPresent Interactive Demo 8"></iframe>
+                                </div>
+                            </div>
+                            <div class="media-box">
+                                <div class="media-title">Presenter Video</div>
+                                <div class="video-embed">
+                                    <video controls poster="./example/demo8_unifying.mp4#t=0.1" preload="metadata">
+                                        <source src="./example/demo8_unifying.mp4" type="video/mp4">
+                                    </video>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
 
-    <div class="columns is-vcentered" style="margin-top: 2rem;">
-      <div class="column is-6">
-        <div style="position: relative; width: 100%; aspect-ratio: 16/9; border-radius: 8px; overflow: hidden; box-shadow: 0 4px 8px rgba(0,0,0,0.1);">
-          <iframe src="./example/demo8_unifying.html" 
-                  style="width: 300%; height: 300%; border: none; transform: scale(0.33); transform-origin: top left;"
-                  title="EvoPresent Interactive Demo 8 - Unifying">
-          </iframe>
-        </div>
-      </div>
-      <div class="column is-6">
-        <div style="position: relative; width: 100%; aspect-ratio: 16/9; border-radius: 8px; overflow: hidden; box-shadow: 0 4px 8px rgba(0,0,0,0.1);">
-          <video controls 
-                 style="width: 100%; height: 100%; object-fit: cover;"
-                 poster="./example/demo8_unifying.mp4#t=0.1"
-                 preload="metadata">
-            <source src="./example/demo8_unifying.mp4" type="video/mp4">
-            Your browser does not support the video tag.
-          </video>
-        </div>
-      </div>
-    </div>
-
-  </div>
-</section>
-
-<section class="section" id="pipeline">
-  <div class="container is-max-desktop">
-    <div class="columns is-centered has-text-centered">
-      <div class="column is-four-fifths">
-        <h2 class="title is-3">💻 EvoPresent Agent Pipeline</h2>
-        <div class="content has-text-justified">
-          <p>
-            <strong>Overview of the EvoPresent framework.</strong> <em>(a)</em> EvoPresent first performs content extraction and voice generation, then constructs the storyline and script, followed by content enhancement using image generation and knowledge retrieval. Design and rendering are handled next, and the aesthetic checker evaluates the initial slide and provides adjustments. <em>(b)</em> <strong>PresAesth</strong> is trained on a human-preference aesthetic dataset via multiple tasks (scoring, defect adjustment, and comparison). <em>(c)</em> The <strong>PresAesth</strong> model guides the agent framework in iterative self-improvement.
-          </p>
-        </div>
-        <div class="columns is-centered">
-          <div class="column is-full">
-            <img src="./static/images/pipeline.png" alt="EvoPresent Pipeline" style="width: 100%; height: auto; border-radius: 8px;">
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<section class="section" id="pipeline">
-  <div class="container is-max-desktop">
-    <div class="columns is-centered has-text-centered">
-      <div class="column is-four-fifths">
-        <h2 class="title is-3">✨ Aesthetic Judgement for Self-Improvement</h2>
-      </div>
-    </div>
-
-    <div class="columns is-vcentered">
-      <div class="column is-6">
-        <img src="./static/images/checker.png" alt="EvoPresent Checker Agent Workflow" style="width: 100%; height: auto; border-radius: 8px;">
-      </div>
-      <div class="column is-6">
-        <div class="content has-text-justified">
-          <p>
-            The key to EvoPresent's high-quality output is its iterative "draft-feedback-refinement" cycle, which is managed by a dedicated <strong>Checker Agent</strong>. This agent acts as an AI design critic, leveraging our specialized aesthetic model, <strong>PresAesth</strong>, to evaluate and progressively refine the presentation.
-          </p>
-          <p>
-            At its core, <strong>PresAesth</strong> is a sophisticated model trained within a multi-task learning framework using <strong>Multi-Task Group Policy Optimization (GRPO)</strong> on a rich dataset of human aesthetic preferences. This unified training approach enables the model to simultaneously perform three distinct tasks from a single input: it assigns an absolute <strong>aesthetic score</strong>, identifies specific <strong>design defects</strong> such as poor layout or typography, and makes <strong>pairwise comparisons</strong> to determine the better of two slide versions. This multi-faceted feedback is crucial, as it powers the self-improvement loop and allows the framework to continuously polish its own work to a professional standard.
-          </p>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<section class="section" id="benchmark">
-  <div class="container is-max-desktop">
-    <div class="columns is-centered has-text-centered">
-      <div class="column is-four-fifths">
-        <h2 class="title is-3">EvoPresent Benchmark</h2>
-      </div>
-    </div>
-
-    <div class="columns is-centered">
-      <div class="column is-eight-fifths">
-        <img src="./static/images/dataset.png" alt="EvoPresent Benchmark Overview" style="width: 100%; height: auto; border-radius: 8px;">
-      </div>
-    </div>
-    <div class="columns is-centered">
-      <div class="column is-three-fifths">
-        <div class="content has-text-justified">
-    <p>
-      The EvoPresent Benchmark offers a comprehensive suite for evaluating both presentation generation and aesthetic models. Its <strong>data sources</strong> are twofold: first, curated materials from top-tier AI conferences, including slides, videos, and scripts; second, a specialized dataset of paired slides with varying aesthetic quality. Correspondingly, its <strong>evaluation metrics</strong> assess two key areas: <strong>content fidelity and design quality</strong> are measured against the conference materials, while the model's capabilities in <strong>absolute scoring, defect identification, and pairwise comparison</strong> are tested using the paired aesthetic slides. This structure enables rigorous and reproducible evaluation for both content generation and aesthetic judgment.
-    </p>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<section class="section" id="compare">
-  <div class="container is-max-desktop">
-    <div class="columns is-centered has-text-centered">
-      <div class="column is-four-fifths">
-        <h2 class="title is-3">🎨 Aesthetic Comparison</h2>
-      </div>
-    </div>
-
-    <div class="columns is-centered">
-      <div class="column is-eight-fifths">
-        <!-- Carousel Container -->
-        <div class="carousel-container" style="position: relative; width: 100%; aspect-ratio: 2/1; border-radius: 8px; overflow: hidden;">
-          <!-- Carousel Images -->
-          <div class="carousel-track" style="display: flex; transition: transform 0.5s ease;">
-            <img src="./static/images/compare.jpg" alt="Image 1" style="width: 100%; height: 100%; object-fit: contain; border-radius: 8px;">
-            <img src="./static/images/pre.png" alt="Image 2" style="width: 100%; height: 100%; object-fit: contain; border-radius: 8px;">
-            <img src="./static/images/poster.png" alt="Image 3" style="width: 100%; height: 100%; object-fit: contain; border-radius: 8px;">
-            <!-- Add more images as needed -->
-          </div>
-          <!-- Navigation Buttons -->
-          <button class="carousel-prev" onclick="changeSlide(-1)" style="position: absolute; top: 50%; left: 10px; transform: translateY(-50%); background-color: rgba(0,0,0,0.5); color: white; border: none; padding: 10px; cursor: pointer;">
-            &#10094;
-          </button>
-          <button class="carousel-next" onclick="changeSlide(1)" style="position: absolute; top: 50%; right: 10px; transform: translateY(-50%); background-color: rgba(0,0,0,0.5); color: white; border: none; padding: 10px; cursor: pointer;">
-            &#10095;
-          </button>
-        </div>
-      </div>
-    </div>
-
-    <div class="columns is-centered">
-      <div class="column is-three-fifths">
-        <div class="content has-text-justified">
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<script>
-  let currentSlide = 0;
-  const slides = document.querySelectorAll('.carousel-track img');
-  const totalSlides = slides.length;
-
-  function changeSlide(direction) {
-    currentSlide = (currentSlide + direction + totalSlides) % totalSlides;
-    const newTransformValue = -currentSlide * 100;
-    document.querySelector('.carousel-track').style.transform = `translateX(${newTransformValue}%)`;
-  }
-</script>
-
-
-<section class="section" id="BibTeX">
-  <div class="container content" style="max-width: 800px; margin: 0 auto;">
-    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem;">
-      <h2 class="title">BibTeX</h2>
-      <button id="copyBibtex" class="button is-small is-light" onclick="copyBibtex()">
-        <span class="icon">
-          <i class="fas fa-copy"></i>
-        </span>
-        <span>Copy</span>
-      </button>
-    </div>
-    <pre><code id="bibtexCode">@misc{liu2025presentingpaperartselfimprovement,
-    title={Presenting a Paper is an Art: Self-Improvement Aesthetic Agents for Academic Presentations},
-    author={Chengzhi Liu and Yuzhe Yang and Kaiwen Zhou and Zhen Zhang and Yue Fan and Yannan Xie and Peng Qi and Xin Eric Wang},
-    year={2025},
-    eprint={2510.05571},
-    archivePrefix={arXiv},
-    primaryClass={cs.CL},
-    url={https://arxiv.org/abs/2510.05571}
+            <section id="citation">
+                <h2>BibTeX</h2>
+                <div class="citation-wrap">
+                    <button type="button" class="btn-copy" id="copy-bibtex">Copy</button>
+                    <pre><code id="bibtex-code">@misc{liu2025presentingpaperartselfimprovement,
+  title        = {Presenting a Paper is an Art: Self-Improvement Aesthetic Agents for Academic Presentations},
+  author       = {Chengzhi Liu and Yuzhe Yang and Kaiwen Zhou and Zhen Zhang and Yue Fan and Yanan Xie and Peng Qi and Xin Eric Wang},
+  year         = {2025},
+  eprint       = {2510.05571},
+  archivePrefix= {arXiv},
+  primaryClass = {cs.CL},
+  url          = {https://arxiv.org/abs/2510.05571}
 }</code></pre>
-  </div>
-</section>
+                </div>
+            </section>
 
-<!-- 一定要把JS放在BODY末尾！ -->
-<script>
-  document.addEventListener("DOMContentLoaded", function () {
-    let currentSlide = 0;
-    const track = document.getElementById("carousel-track");
-    const totalSlides = track.children.length;
+            <footer>
+                <p>© 2025 EvoPresent Project. All rights reserved.</p>
+            </footer>
+        </main>
+    </div>
 
-    function updateSlide() {
-      const offset = -currentSlide * 100;
-      track.style.transform = `translateX(${offset}%)`;
-    }
+    <script>
+        (function () {
+            var btn = document.getElementById('copy-bibtex');
+            var code = document.getElementById('bibtex-code');
+            if (btn && code) {
+                btn.addEventListener('click', function () {
+                    var text = code.textContent;
+                    navigator.clipboard.writeText(text).then(function () {
+                        btn.textContent = 'Copied!';
+                        btn.classList.add('copied');
+                        setTimeout(function () {
+                            btn.textContent = 'Copy';
+                            btn.classList.remove('copied');
+                        }, 2000);
+                    });
+                });
+            }
+        })();
 
-    document.getElementById("nextBtn").addEventListener("click", function () {
-      currentSlide = (currentSlide + 1) % totalSlides;
-      updateSlide();
-    });
+        (function () {
+            var nav = document.querySelector('.sidebar nav');
+            var links = nav ? nav.querySelectorAll('a[href^="#"]') : [];
+            var sections = [];
+            links.forEach(function (a) {
+                var id = a.getAttribute('href').slice(1);
+                var el = document.getElementById(id);
+                if (el) sections.push({ el: el, link: a });
+            });
 
-    document.getElementById("prevBtn").addEventListener("click", function () {
-      currentSlide = (currentSlide - 1 + totalSlides) % totalSlides;
-      updateSlide();
-    });
-  });
-</script>
+            function updateActive() {
+                var scrollY = window.scrollY || window.pageYOffset;
+                var viewportMid = scrollY + window.innerHeight * 0.35;
+                var active = null;
 
-<script>
-  document.addEventListener("DOMContentLoaded", function () {
-    let currentSlide = 0;
-    const track = document.getElementById("takeaway-track");
-    const totalSlides = track.children.length;
+                for (var i = sections.length - 1; i >= 0; i--) {
+                    var top = sections[i].el.getBoundingClientRect().top + scrollY;
+                    if (top <= viewportMid) {
+                        active = sections[i].link;
+                        break;
+                    }
+                }
 
-    function updateSlide() {
-      const offset = -currentSlide * 100;
-      track.style.transform = `translateX(${offset}%)`;
-    }
+                if (!active && sections.length) active = sections[0].link;
+                links.forEach(function (a) { a.classList.remove('active'); });
+                if (active) active.classList.add('active');
+            }
 
-    document.getElementById("takeawayNext").addEventListener("click", function () {
-      currentSlide = (currentSlide + 1) % totalSlides;
-      updateSlide();
-    });
+            window.addEventListener('scroll', function () { requestAnimationFrame(updateActive); });
+            window.addEventListener('load', updateActive);
+            updateActive();
+        })();
 
-    document.getElementById("takeawayPrev").addEventListener("click", function () {
-      currentSlide = (currentSlide - 1 + totalSlides) % totalSlides;
-      updateSlide();
-    });
-  });
+        (function () {
+            var btn = document.getElementById('moreResearchBtn');
+            var menu = document.getElementById('moreResearchMenu');
+            if (!btn || !menu) return;
 
-  // Copy BibTeX function
-  function copyBibtex() {
-    const bibtexCode = document.getElementById('bibtexCode').textContent;
-    navigator.clipboard.writeText(bibtexCode).then(function() {
-      // Change button text temporarily to show success
-      const button = document.getElementById('copyBibtex');
-      const originalText = button.innerHTML;
-      button.innerHTML = '<span class="icon"><i class="fas fa-check"></i></span><span>Copied!</span>';
-      button.classList.remove('is-primary');
-      button.classList.add('is-success');
-      
-      // Reset button after 2 seconds
-      setTimeout(function() {
-        button.innerHTML = originalText;
-        button.classList.remove('is-success');
-        button.classList.add('is-primary');
-      }, 2000);
-    }).catch(function(err) {
-      console.error('Could not copy text: ', err);
-      alert('Failed to copy BibTeX. Please try again.');
-    });
-  }
-</script>
+            btn.addEventListener('click', function (event) {
+                event.stopPropagation();
+                menu.classList.toggle('open');
+            });
 
+            document.addEventListener('click', function (event) {
+                if (!menu.contains(event.target) && event.target !== btn) {
+                    menu.classList.remove('open');
+                }
+            });
+        })();
 
+        (function () {
+            var track = document.getElementById('compareTrack');
+            if (!track) return;
+            var slides = track.children.length;
+            var index = 0;
+
+            function update() {
+                track.style.transform = 'translateX(' + (-index * 100) + '%)';
+            }
+
+            var prev = document.getElementById('comparePrev');
+            var next = document.getElementById('compareNext');
+            if (prev) {
+                prev.addEventListener('click', function () {
+                    index = (index - 1 + slides) % slides;
+                    update();
+                });
+            }
+            if (next) {
+                next.addEventListener('click', function () {
+                    index = (index + 1) % slides;
+                    update();
+                });
+            }
+        })();
+    </script>
+</body>
+</html>
